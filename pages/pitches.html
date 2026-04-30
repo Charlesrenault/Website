@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Pitches — ECI</title>
+<meta name="description" content="Browse ESSEC Capital Investments' equity research pitches across Energy, Healthcare, Financials, Consumer, Industrials, and TMT.">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="../style.css">
+<style>
+  /* ── PDF Modal ── */
+  .pdf-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.72);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    backdrop-filter: blur(4px);
+  }
+  .pdf-modal-overlay.open {
+    display: flex;
+  }
+  .pdf-modal {
+    background: var(--color-surface);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 960px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+  }
+  .pdf-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+  .pdf-modal__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+  }
+  .pdf-modal__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    transition: background 0.15s, color 0.15s;
+  }
+  .pdf-modal__close:hover {
+    background: var(--color-surface-2);
+    color: var(--color-text-primary);
+  }
+  .pdf-modal__body {
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .pdf-modal__body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  .pdf-modal__fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 1rem;
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+  /* View pitch button on cards */
+  .pitch-card__pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-primary);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .pitch-card__pdf-btn:hover { color: var(--color-accent); }
+  .pitch-card__pdf-btn svg { flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div id="header-slot"></div>
+<main id="main">
+
+  <section class="page-header">
+    <p class="section-label" style="color:var(--color-accent);">Equity Research</p>
+    <h1 class="page-header__title">Our Pitches</h1>
+    <p class="page-header__desc">Original fundamental analysis, rigorous valuation, and actionable investment recommendations — across every major sector. Click <em>View Pitch</em> to read the full research document.</p>
+  </section>
+
+  <!-- Filter + Gallery -->
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Sectors</button>
+        <button class="filter-btn" data-filter="energy">Energy</button>
+        <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+        <button class="filter-btn" data-filter="financials">Financials</button>
+        <button class="filter-btn" data-filter="consumer">Consumer</button>
+        <button class="filter-btn" data-filter="industrials">Industrials</button>
+        <button class="filter-btn" data-filter="technology">Technology</button>
+      </div>
+
+      <!-- ── 2025/2026 Season ── -->
+      <div style="margin-bottom:var(--space-4);">
+        <p class="section-label">Season 2025 / 2026</p>
+      </div>
+      <div class="grid-3" style="margin-bottom:var(--space-16);">
+
+        <div class="card card--hover pitch-card fade-in" data-sector="industrials">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">AI</div>
+            <div>
+              <div class="pitch-card__company">Air Liquide</div>
+              <div class="pitch-card__sector">Industrials — Specialty Gases · EPA:AI</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">World leader in industrial and medical gases with a structural growth story in green hydrogen and semiconductor gas supply.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Apr 2025 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="consumer">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">KO</div>
+            <div>
+              <div class="pitch-card__company">Coca-Cola</div>
+              <div class="pitch-card__sector">Consumer Staples · NYSE:KO</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Unrivalled brand moat and pricing power. Premium valuation justified by resilient earnings and global emerging-market exposure.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--hold">Hold</span>
+            <span>Mar 2025 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="consumer">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">MC</div>
+            <div>
+              <div class="pitch-card__company">LVMH</div>
+              <div class="pitch-card__sector">Consumer Discretionary — Luxury · EPA:MC</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">World's largest luxury conglomerate. Short-term China headwinds create an attractive entry point for a long-term compounder.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Apr 2025 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="healthcare">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">SNY</div>
+            <div>
+              <div class="pitch-card__company">Healthcare Sector Coverage</div>
+              <div class="pitch-card__sector">Healthcare — Pharma &amp; Biotech</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Multi-stock sector analysis covering Sanofi, Bayer, Eli Lilly, and WuXi AppTec — mapping the post-COVID pharma landscape.</p>
+          <div class="pitch-card__meta">
+            <span class="tag">Sector</span>
+            <span>Feb 2025 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="financials">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">SASE</div>
+            <div>
+              <div class="pitch-card__company">Saudi Exchange</div>
+              <div class="pitch-card__sector">Financials — Stock Exchange · TADAWUL:SASE</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Saudi Vision 2030 capital market reforms and surging IPO pipeline make SASE a high-conviction emerging markets exchange play.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Jan 2025 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="energy">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">TTE</div>
+            <div>
+              <div class="pitch-card__company">TotalEnergies</div>
+              <div class="pitch-card__sector">Energy — Integrated Oil &amp; Gas · EPA:TTE</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Best-in-class dividend and LNG strategy among European majors. Credible low-carbon transition with an attractive 5× P/E discount to US peers.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Dec 2024 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="energy"
+             data-pdf="../pitches/energy-utilities.pdf" data-pdf-title="Energy &amp; Utilities — Sector Coverage">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">⚡</div>
+            <div>
+              <div class="pitch-card__company">Energy &amp; Utilities — Sector Coverage</div>
+              <div class="pitch-card__sector">Energy — Renewables &amp; Utilities</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Comprehensive sector coverage of European energy and utilities — mapping the transition from fossil fuels to renewables across regulation, capex, and valuation.</p>
+          <div class="pitch-card__meta">
+            <span class="tag">Sector</span>
+            <span>2025 · ECI Research</span>
+          </div>
+          <button class="pitch-card__pdf-btn" aria-label="Open pitch PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Pitch
+          </button>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="energy"
+             data-pdf="../pitches/halliburton.pdf" data-pdf-title="Halliburton — Buy">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">HAL</div>
+            <div>
+              <div class="pitch-card__company">Halliburton</div>
+              <div class="pitch-card__sector">Energy — Oilfield Services · NYSE:HAL</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">International upstream capex cycle drives OFS demand recovery. Halliburton's technology differentiation and margin expansion warrant a re-rating.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Mar 2025 · ECI Research</span>
+          </div>
+          <button class="pitch-card__pdf-btn" aria-label="Open pitch PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Pitch
+          </button>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="industrials"
+             data-pdf="../pitches/nexans.pdf" data-pdf-title="Nexans — Buy">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">NXS</div>
+            <div>
+              <div class="pitch-card__company">Nexans</div>
+              <div class="pitch-card__sector">Industrials — Cables &amp; Connectivity · EPA:NEX</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Structural beneficiary of offshore wind and grid electrification megatrends. Order backlog growth and margin improvement support a Buy thesis.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Feb 2025 · ECI Research</span>
+          </div>
+          <button class="pitch-card__pdf-btn" aria-label="Open pitch PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Pitch
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ── 2024/2025 Season ── -->
+      <div style="margin-bottom:var(--space-4);">
+        <p class="section-label">Season 2024 / 2025</p>
+      </div>
+      <div class="grid-3">
+
+        <div class="card card--hover pitch-card fade-in" data-sector="healthcare">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">NOVO</div>
+            <div>
+              <div class="pitch-card__company">Novo Nordisk</div>
+              <div class="pitch-card__sector">Healthcare — Pharma · CPH:NOVO-B</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">GLP-1 market leadership with Ozempic and Wegovy. A once-in-a-generation obesity drug franchise with a decade-long growth runway.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Jan 2025 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="technology">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">NVDA</div>
+            <div>
+              <div class="pitch-card__company">Nvidia</div>
+              <div class="pitch-card__sector">Technology — Semiconductors · NASDAQ:NVDA</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Data centre GPU monopoly powering the AI infrastructure buildout. Dominant CUDA ecosystem creates unmatched switching costs.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Mar 2024 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="financials">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">BLK</div>
+            <div>
+              <div class="pitch-card__company">BlackRock</div>
+              <div class="pitch-card__sector">Financials — Asset Management · NYSE:BLK</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">World's largest asset manager with a structural ETF secular tailwind. AUM growth and fee resilience make BlackRock a durable compounder.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Jan 2025 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="financials">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">AMUN</div>
+            <div>
+              <div class="pitch-card__company">Amundi</div>
+              <div class="pitch-card__sector">Financials — Asset Management · EPA:AMUN</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Europe's largest asset manager trading at a discount to global peers. Cost discipline and ESG product expansion support earnings upgrades.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Jan 2025 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="financials">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">GS</div>
+            <div>
+              <div class="pitch-card__company">Goldman Sachs</div>
+              <div class="pitch-card__sector">Financials — Investment Banking · NYSE:GS</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">FICC and Advisory franchise rebounding in a rate-driven cycle. Consumer banking exit and capital return optionality provide earnings visibility.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Jan 2025 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="industrials">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">ALDLT</div>
+            <div>
+              <div class="pitch-card__company">Delta Plus Group</div>
+              <div class="pitch-card__sector">Industrials — Safety Equipment · EPA:ALDLT</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Niche PPE leader with strong regulatory tailwinds, international expansion, and a compelling small-cap valuation opportunity.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Oct 2024 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="industrials">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">BA</div>
+            <div>
+              <div class="pitch-card__company">Boeing</div>
+              <div class="pitch-card__sector">Industrials — Aerospace · NYSE:BA</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Deep operational and reputational challenges outweigh near-term recovery. Balance sheet repair and production normalisation are multi-year tasks.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--sell">Sell</span>
+            <span>Apr 2024 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="energy">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">TRGP</div>
+            <div>
+              <div class="pitch-card__company">Targa Resources</div>
+              <div class="pitch-card__sector">Energy — Midstream Gas · NYSE:TRGP</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Permian Basin volume growth and fee-based cash flow model insulate Targa from commodity price volatility. Strong dividend growth outlook.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Nov 2024 · ECI Research</span>
+          </div>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="energy"
+             data-pdf="../pitches/ren.pdf" data-pdf-title="REN — Redes Energéticas Nacionais · Buy">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">RENE</div>
+            <div>
+              <div class="pitch-card__company">REN — Redes Energéticas</div>
+              <div class="pitch-card__sector">Energy — Utilities · EURONEXT:RENE</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Portuguese transmission network operator with regulated asset base providing highly predictable, inflation-linked returns.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Oct 2024 · ECI Research</span>
+          </div>
+          <button class="pitch-card__pdf-btn" aria-label="Open pitch PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Pitch
+          </button>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="energy"
+             data-pdf="../pitches/bluenord.pdf" data-pdf-title="BlueNord ASA — Buy">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">BNOR</div>
+            <div>
+              <div class="pitch-card__company">BlueNord ASA</div>
+              <div class="pitch-card__sector">Energy — E&amp;P · OB:BNOR</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Danish North Sea operator with a high-quality asset base, strong free cash flow generation, and an attractive dividend for an E&amp;P play.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>2024 · ECI Research</span>
+          </div>
+          <button class="pitch-card__pdf-btn" aria-label="Open pitch PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Pitch
+          </button>
+        </div>
+
+        <div class="card card--hover pitch-card fade-in" data-sector="energy">
+          <div class="pitch-card__header">
+            <div class="pitch-card__logo">IBE</div>
+            <div>
+              <div class="pitch-card__company">Iberdrola</div>
+              <div class="pitch-card__sector">Energy — Utilities / Renewables · BME:IBE</div>
+            </div>
+          </div>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Europe's leading renewables utility with a €41bn investment plan. Regulatory visibility and green bond framework provide durable growth.</p>
+          <div class="pitch-card__meta">
+            <span class="tag tag--buy">Buy</span>
+            <span>Jan 2025 · ECI Research</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background:var(--color-primary);color:var(--color-text-inverse);text-align:center;">
+    <div class="container" style="max-width:var(--content-default);">
+      <h2 style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);margin-bottom:var(--space-3);">Interested in our research?</h2>
+      <p style="opacity:0.8;margin-bottom:var(--space-6);max-width:45ch;margin-inline:auto;">Follow us on LinkedIn to receive our latest pitch publications and investment insights.</p>
+      <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" target="_blank" rel="noopener noreferrer" class="btn btn--accent btn--lg">Follow on LinkedIn</a>
+    </div>
+  </section>
+
+</main>
+<div id="footer-slot"></div>
+
+<!-- ── PDF Modal ── -->
+<div class="pdf-modal-overlay" id="pdfModal" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle">
+  <div class="pdf-modal">
+    <div class="pdf-modal__header">
+      <span class="pdf-modal__title" id="pdfModalTitle">Pitch Document</span>
+      <button class="pdf-modal__close" id="pdfModalClose" aria-label="Close PDF viewer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="pdf-modal__body" id="pdfModalBody" style="height:75vh;">
+      <!-- iframe injected by JS -->
+    </div>
+  </div>
+</div>
+
+<script src="../components.js"></script>
+<script>
+(function () {
+  // ── Sector filter ──
+  document.querySelectorAll('.filter-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.pitch-card').forEach(function (card) {
+        var show = filter === 'all' || card.dataset.sector === filter;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // ── PDF modal ──
+  var overlay  = document.getElementById('pdfModal');
+  var titleEl  = document.getElementById('pdfModalTitle');
+  var body     = document.getElementById('pdfModalBody');
+  var closeBtn = document.getElementById('pdfModalClose');
+
+  function openPdf(pdfUrl, pdfTitle) {
+    titleEl.textContent = pdfTitle || 'Pitch Document';
+    body.innerHTML = '<iframe src="' + pdfUrl + '" title="' + (pdfTitle || 'Pitch PDF') + '"></iframe>';
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePdf() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    // destroy iframe to stop PDF rendering
+    body.innerHTML = '';
+  }
+
+  // Wire up "View Pitch" buttons
+  document.querySelectorAll('.pitch-card[data-pdf] .pitch-card__pdf-btn').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var card = btn.closest('.pitch-card');
+      openPdf(card.dataset.pdf, card.dataset.pdfTitle);
+    });
+  });
+
+  // Also allow clicking the whole card if it has a PDF
+  document.querySelectorAll('.pitch-card[data-pdf]').forEach(function (card) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('.pitch-card__pdf-btn')) return; // already handled
+      openPdf(card.dataset.pdf, card.dataset.pdfTitle);
+    });
+  });
+
+  // Close on button / overlay click / Escape
+  closeBtn.addEventListener('click', closePdf);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePdf();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closePdf();
+  });
+})();
+</script>
+</body>
+</html>

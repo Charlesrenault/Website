@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Fund — ECI</title>
+<meta name="description" content="Track the performance of the ESSEC Capital Investments student fund. Quarterly results coming after our first full year of management.">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div id="header-slot"></div>
+<main id="main">
+
+  <section class="page-header">
+    <p class="section-label" style="color:var(--color-accent);">Live Portfolio</p>
+    <h1 class="page-header__title">The ECI Fund</h1>
+    <p class="page-header__desc">A real investment fund managed by ESSEC students. Quarterly performance results will be published here once we complete our first year of management.</p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       PORTFOLIO DASHBOARD EMBED
+       Once your dashboard is ready, replace the placeholder
+       below with your actual embed URL (e.g. a public
+       Google Data Studio / Looker Studio report, a Notion
+       embed, a custom React app hosted on Netlify, etc.).
+
+       Example — Looker Studio:
+         src="https://lookerstudio.google.com/embed/reporting/YOUR_REPORT_ID/page/p_xxxx"
+
+       Example — Custom app:
+         src="https://your-dashboard.netlify.app"
+
+       Set DASHBOARD_URL to your URL, or leave it empty to
+       show the "coming soon" card instead.
+  ════════════════════════════════════════════════════════ -->
+  <section class="section" style="background:var(--color-surface-2);">
+    <div class="container">
+      <div class="text-center mb-12">
+        <p class="section-label">Live Portfolio</p>
+        <h2 class="section-title" style="margin-inline:auto;">Portfolio Dashboard</h2>
+        <p class="section-desc" style="margin-inline:auto;">Real-time holdings, sector allocation, and performance attribution — updated automatically from our tracking system.</p>
+      </div>
+
+      <!-- Dashboard embed — swap src once ready -->
+      <div id="dashboardWrapper" style="border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.1);min-height:520px;background:var(--color-surface);">
+
+        <!-- ↓ COMING-SOON PLACEHOLDER — remove this block when dashboard is live ↓ -->
+        <div id="dashboardPlaceholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:520px;gap:1rem;padding:2rem;text-align:center;color:var(--color-text-muted);">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="opacity:0.4;">
+            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          <h3 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-lg);color:var(--color-text-primary);margin:0;">Dashboard Coming Soon</h3>
+          <p style="max-width:42ch;font-size:var(--text-sm);line-height:1.6;margin:0;">We're building a live portfolio dashboard. Once it's ready, paste its URL into <code>fund.html</code> at the marked comment to embed it here automatically.</p>
+        </div>
+        <!-- ↑ Remove the block above once the iframe below is uncommented ↑ -->
+
+        <!-- ↓ UNCOMMENT and fill in your dashboard URL when ready ↓
+        <iframe
+          id="portfolioDashboard"
+          src="PASTE_YOUR_DASHBOARD_URL_HERE"
+          title="ECI Portfolio Dashboard"
+          style="width:100%;height:640px;border:none;display:block;"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+        ↑ UNCOMMENT the block above when your dashboard is live ↑ -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Fund overview -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="grid-2" style="gap:var(--space-12);align-items:start;">
+        <div class="fade-in">
+          <p class="section-label">About the Fund</p>
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-desc" style="margin-bottom:var(--space-4);">The ECI Fund is a real equity portfolio managed collectively by ECI members following a disciplined investment process. Every investment decision is driven by the equity research produced in our weekly pitch sessions.</p>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);">Each position originates from a formal pitch presented and challenged by the full team. The fund gives members direct, accountable portfolio management experience — something very few student associations can offer.</p>
+        </div>
+        <div class="fade-in">
+          <p class="section-label">Investment Process</p>
+          <h2 class="section-title">From Research to Portfolio</h2>
+          <div class="timeline">
+            <div class="timeline__item">
+              <div class="timeline__title">1. Analyst Research</div>
+              <div class="timeline__desc">Analyst produces equity research covering financials, competitive positioning, valuation, and investment thesis.</div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__title">2. Pitch Presentation</div>
+              <div class="timeline__desc">Pitch presented and challenged in front of the full ECI team. Refined over one or more sessions before a vote.</div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__title">3. Investment Decision</div>
+              <div class="timeline__desc">Board votes on inclusion. Position sizing determined by conviction level and portfolio construction discipline.</div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__title">4. Ongoing Monitoring</div>
+              <div class="timeline__desc">Quarterly reviews with defined exit criteria. Performance reported against benchmark each quarter.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coming Soon Performance -->
+  <section class="section" style="background:var(--color-surface-2);">
+    <div class="container">
+      <div class="text-center mb-12">
+        <p class="section-label">Performance</p>
+        <h2 class="section-title" style="margin-inline:auto;">Quarterly Results</h2>
+        <p class="section-desc" style="margin-inline:auto;">Full performance data will be published after our first complete year of active fund management.</p>
+      </div>
+
+      <div class="coming-soon fade-in">
+        <svg class="coming-soon__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 3v18h18"/>
+          <path d="M7 16l4-4 4 4 4-4"/>
+        </svg>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-lg);margin-bottom:var(--space-2);">Coming After Year 1</h3>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);max-width:44ch;text-align:center;line-height:1.6;">Once we complete our first full year of active portfolio management, this page will display quarterly returns, benchmark comparison vs CAC 40 / STOXX 600, top holdings, and Sharpe ratio — updated every quarter.</p>
+
+        <div style="margin-top:var(--space-8);display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-3);">
+          <div class="card" style="min-width:140px;text-align:center;padding:var(--space-4);">
+            <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);color:var(--color-accent);">—</div>
+            <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;">YTD Return</div>
+          </div>
+          <div class="card" style="min-width:140px;text-align:center;padding:var(--space-4);">
+            <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);color:var(--color-accent);">—</div>
+            <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;">vs Benchmark</div>
+          </div>
+          <div class="card" style="min-width:140px;text-align:center;padding:var(--space-4);">
+            <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);color:var(--color-accent);">—</div>
+            <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;">Positions</div>
+          </div>
+          <div class="card" style="min-width:140px;text-align:center;padding:var(--space-4);">
+            <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);color:var(--color-accent);">—</div>
+            <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;">Sharpe Ratio</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Placeholder table -->
+      <div class="perf-table mt-8 fade-in" style="opacity:0.35;pointer-events:none;">
+        <table style="width:100%;border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th>Quarter</th>
+              <th>ECI Fund</th>
+              <th>CAC 40</th>
+              <th>STOXX 600</th>
+              <th>Alpha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Q1 2026</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Q2 2026</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Q3 2026</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Q4 2026</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="text-align:center;">
+    <div class="container" style="max-width:var(--content-default);">
+      <h2 style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);margin-bottom:var(--space-3);">Want to be part of it?</h2>
+      <p style="color:var(--color-text-muted);margin-bottom:var(--space-6);max-width:45ch;margin-inline:auto;">Join ECI and contribute directly to the fund's investment decisions through your own equity research.</p>
+      <div style="display:flex;justify-content:center;gap:var(--space-3);flex-wrap:wrap;">
+        <a href="./join.html" class="btn btn--primary btn--lg">Apply to Join</a>
+        <a href="./pitches.html" class="btn btn--secondary btn--lg">View Our Pitches</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+<div id="footer-slot"></div>
+<script src="../components.js"></script>
+</body>
+</html>

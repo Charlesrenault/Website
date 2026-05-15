@@ -226,14 +226,31 @@ function initFilters() {
   });
 }
 
+// ── Scroll Reveal (IntersectionObserver) ──
+function initScrollReveal() {
+  const els = document.querySelectorAll('.fade-in');
+  if (!els.length) return;
+  els.forEach(el => el.classList.add('will-animate'));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => observer.observe(el));
+}
+
 // ── Inject Header/Footer ──
 document.addEventListener('DOMContentLoaded', () => {
   const headerSlot = document.getElementById('header-slot');
   const footerSlot = document.getElementById('footer-slot');
   if (headerSlot) headerSlot.innerHTML = renderHeader();
   if (footerSlot) footerSlot.innerHTML = renderFooter();
-  
+
   // Re-init FAQ if present
   if (document.querySelector('.faq-item')) initFAQ();
   if (document.querySelector('.filter-btn')) initFilters();
+  initScrollReveal();
 });

@@ -18,6 +18,77 @@
     font-size: 1.4rem;
     color: #fff;
   }
+  .team-block {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: var(--space-6);
+  }
+  .team-block__label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+  .team-block__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .team-block__head-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .team-block__head-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+  }
+  .team-block__head-role {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+  .team-block__analysts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .analyst-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-3);
+    border-radius: 8px;
+    background: var(--color-surface-2);
+  }
+  .analyst-row__name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .analyst-row__li {
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    transition: color 0.15s;
+  }
+  .analyst-row__li:hover { color: var(--color-primary); }
 </style>
 </head>
 <body>
@@ -27,7 +98,7 @@
   <section class="page-header">
     <p class="section-label" style="color:var(--color-accent);">Our People</p>
     <h1 class="page-header__title">The ECI Team</h1>
-    <p class="page-header__desc">50+ ESSEC students united by a passion for investing — 2025/2026.</p>
+    <p class="page-header__desc">30+ ESSEC students united by a passion for investing — 2025/2026.</p>
   </section>
 
   <!-- ── Bureau ── -->
@@ -36,100 +107,46 @@
       <div class="text-center mb-12">
         <p class="section-label">Bureau</p>
         <h2 class="section-title" style="margin-inline:auto;">Executive Board</h2>
-        <p class="section-desc" style="margin-inline:auto;">The four elected officers responsible for ECI's governance and operations.</p>
+        <p class="section-desc" style="margin-inline:auto;">The elected officers responsible for ECI's governance and operations.</p>
       </div>
       <div class="grid-4 fade-in" style="max-width:960px;margin-inline:auto;">
 
         <div class="person-card">
-          <div class="person-card__photo" style="background:linear-gradient(135deg,var(--color-primary),var(--color-accent));">RD</div>
+          <div class="person-card__photo" style="background:linear-gradient(135deg,var(--color-primary),var(--color-accent));">MB</div>
           <div class="person-card__role">Président</div>
-          <div class="person-card__name">Rémy Durand</div>
-          <p class="person-card__bio">Grande École</p>
-          <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <div class="person-card__name">Marvin Braud</div>
+          <p class="person-card__bio">Head of Defensive</p>
+          <a href="https://www.linkedin.com/in/marvin-braud/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
         </div>
 
         <div class="person-card">
-          <div class="person-card__photo" style="background:linear-gradient(135deg,var(--color-accent),var(--color-primary));">LS</div>
+          <div class="person-card__photo" style="background:linear-gradient(135deg,var(--color-accent),var(--color-primary));">CR</div>
           <div class="person-card__role">Vice-Président</div>
-          <div class="person-card__name">Ludovic Saint-Yves</div>
-          <p class="person-card__bio">Global BBA</p>
-          <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-
-        <div class="person-card">
-          <div class="person-card__photo" style="background:linear-gradient(135deg,#2a4a6e,var(--color-primary));">AM</div>
-          <div class="person-card__role">Secrétaire</div>
-          <div class="person-card__name">Axel Maizières</div>
-          <p class="person-card__bio">Global BBA</p>
-          <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-
-        <div class="person-card">
-          <div class="person-card__photo" style="background:linear-gradient(135deg,var(--color-primary),#3a5a7e);">JC</div>
-          <div class="person-card__role">Trésorier</div>
-          <div class="person-card__name">Joseph Clément</div>
-          <p class="person-card__bio">Grande École</p>
-          <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Team Leaders ── -->
-  <section class="section" style="background:var(--color-surface-2);">
-    <div class="container">
-      <div class="text-center mb-12">
-        <p class="section-label">Responsables</p>
-        <h2 class="section-title" style="margin-inline:auto;">Team Leaders</h2>
-        <p class="section-desc" style="margin-inline:auto;">ECI's four team leaders driving research, operations, and member development.</p>
-      </div>
-      <div class="grid-4 fade-in" style="max-width:960px;margin-inline:auto;">
-
-        <div class="person-card">
-          <div class="person-card__photo" style="background:linear-gradient(135deg,#485059,var(--color-accent));">HP</div>
-          <div class="person-card__role">Team Leader</div>
-          <div class="person-card__name">Hadrien Puche</div>
-          <p class="person-card__bio">Grande École</p>
-          <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-
-        <div class="person-card">
-          <div class="person-card__photo" style="background:linear-gradient(135deg,var(--color-accent),#485059);">AM</div>
-          <div class="person-card__role">Team Leader</div>
-          <div class="person-card__name">Alexis Mescheriakoff</div>
-          <p class="person-card__bio">Grande École</p>
-          <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-
-        <div class="person-card">
-          <div class="person-card__photo" style="background:linear-gradient(135deg,var(--color-primary),var(--color-accent));">CF</div>
-          <div class="person-card__role">Team Leader</div>
-          <div class="person-card__name">Corentin Fuller</div>
-          <p class="person-card__bio">Grande École</p>
-          <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-
-        <div class="person-card">
-          <div class="person-card__photo" style="background:linear-gradient(135deg,#3a5a7e,var(--color-primary));">CR</div>
-          <div class="person-card__role">Team Leader</div>
           <div class="person-card__name">Charles Renault</div>
-          <p class="person-card__bio">Global BBA</p>
-          <a href="https://www.linkedin.com/in/charles-renault-essec/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <p class="person-card__bio">Head of Opportunities</p>
+          <a href="https://www.linkedin.com/in/charles-renault/?locale=fr" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+
+        <div class="person-card">
+          <div class="person-card__photo" style="background:linear-gradient(135deg,#2a4a6e,var(--color-primary));">NS</div>
+          <div class="person-card__role">Trésorier</div>
+          <div class="person-card__name">Nathan Swierczinski</div>
+          <p class="person-card__bio">TMT / FIG Analyst</p>
+          <a href="https://www.linkedin.com/in/nathanswierczinski/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+
+        <div class="person-card">
+          <div class="person-card__photo" style="background:linear-gradient(135deg,var(--color-primary),#3a5a7e);">YO</div>
+          <div class="person-card__role">Communication</div>
+          <div class="person-card__name">Yoko Ogino</div>
+          <p class="person-card__bio">Social Media Manager</p>
+          <a href="https://www.linkedin.com/in/yoko-o-187632315/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
         </div>
@@ -138,61 +155,280 @@
     </div>
   </section>
 
-  <!-- ── All Members ── -->
+  <!-- ── Investment Committee ── -->
+  <section class="section" style="background:var(--color-surface-2);padding-top:var(--space-10);padding-bottom:var(--space-10);">
+    <div class="container">
+      <div class="text-center mb-8">
+        <p class="section-label">Comité d'Investissement</p>
+        <h2 class="section-title" style="margin-inline:auto;">Investment Committee</h2>
+        <p class="section-desc" style="margin-inline:auto;">Senior members overseeing investment decisions and research quality.</p>
+      </div>
+      <div style="display:flex;gap:var(--space-6);justify-content:center;flex-wrap:wrap;" class="fade-in">
+
+        <div class="person-card" style="max-width:220px;">
+          <div class="person-card__photo" style="background:linear-gradient(135deg,#485059,var(--color-accent));">LS</div>
+          <div class="person-card__role">Investment Committee</div>
+          <div class="person-card__name">Ludovic Saint-Yves</div>
+          <p class="person-card__bio">Head of TMT / FIG</p>
+          <a href="https://www.linkedin.com/in/ludovic-saint-yves/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+
+        <div class="person-card" style="max-width:220px;">
+          <div class="person-card__photo" style="background:linear-gradient(135deg,var(--color-accent),#485059);">RD</div>
+          <div class="person-card__role">Investment Committee</div>
+          <div class="person-card__name">Rémy Durand</div>
+          <p class="person-card__bio">Head of Utilities</p>
+          <a href="https://www.linkedin.com/in/r%C3%A9my-durand-078860329/" class="person-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Teams ── -->
   <section class="section">
     <div class="container">
       <div class="text-center mb-12">
-        <p class="section-label">Members 2025/2026</p>
-        <h2 class="section-title" style="margin-inline:auto;">Our Analysts</h2>
-        <p class="section-desc" style="margin-inline:auto;">All ECI members — Grande École and Global BBA programmes.</p>
+        <p class="section-label">Sector Teams</p>
+        <h2 class="section-title" style="margin-inline:auto;">Research Teams</h2>
+        <p class="section-desc" style="margin-inline:auto;">Five sector-focused teams, each led by an experienced head analyst.</p>
       </div>
-      <div class="grid-4 fade-in" style="gap:var(--space-3);">
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Aurélien de la Morandière</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Dylan Bendjenna</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Baptiste Gaunet</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Elouan Couallier</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Alexis Mussier</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Sarah Lin</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA INT</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Michel Ghanem</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Tristan de la Grandière</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Tommy Ihoua</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Alexandra Laxamana</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Naïna Nkouankam Nankam</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Alexis Lavoie</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Elie Lozano</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Andrea Jaussaud</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Hugo Founta</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Yoko Ogino</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA INT</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Margaux Flasque</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Marvin Braud</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Lucas Magret Delord</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Autre</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Cyril Millon</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Mahdy Mousslie</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Arthur Rataud</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Arthur Fèvre</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Louis Klemencic</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Samuel Bral</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Peter Martin</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA INT</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Mia Hallage</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Autre</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Antoine Bourdon</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Théo Lim</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Azel Schwanengel</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Adrien Labergère</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Autre</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Léonard Amoretti de Stéphano</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Oscar Moulet</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Autre</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Nathan Swierczinski</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Noemie Chien Kan Foon</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Gaspard Nigon</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Enzo Salamitou</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Ashley Klip</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA INT</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Antoine Chibon</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Karim Turpin</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Francesco Pigino</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Global BBA FR</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Antoine Cordier</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
-        <div class="card" style="padding:var(--space-3);text-align:center;"><div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);">Eliot Garnero</div><div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;">Grande École</div></div>
+
+      <div class="grid-3 fade-in" style="align-items:start;">
+
+        <!-- Portfolio Management -->
+        <div class="team-block">
+          <div class="team-block__label">Portfolio Management</div>
+          <div class="team-block__head">
+            <div class="team-block__head-avatar" style="background:linear-gradient(135deg,var(--color-primary),var(--color-accent));">AM</div>
+            <div>
+              <div class="team-block__head-name">Axel Maizières</div>
+              <div class="team-block__head-role">Head of Portfolio Management</div>
+            </div>
+            <a href="https://www.linkedin.com/in/axel-maizieres/" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:var(--color-text-muted);" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <div class="team-block__analysts">
+            <div class="analyst-row">
+              <span class="analyst-row__name">Francesco Pigino</span>
+              <a href="https://www.linkedin.com/in/francesco-pigino-2a137a259/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Azel Schwanengel</span>
+              <a href="https://www.linkedin.com/in/azel-schwanengel/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TMT / FIG -->
+        <div class="team-block">
+          <div class="team-block__label">TMT / FIG</div>
+          <div class="team-block__head">
+            <div class="team-block__head-avatar" style="background:linear-gradient(135deg,#485059,var(--color-accent));">LS</div>
+            <div>
+              <div class="team-block__head-name">Ludovic Saint-Yves</div>
+              <div class="team-block__head-role">Head of TMT / FIG</div>
+            </div>
+            <a href="https://www.linkedin.com/in/ludovic-saint-yves/" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:var(--color-text-muted);" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <div class="team-block__analysts">
+            <div class="analyst-row">
+              <span class="analyst-row__name">Nathan Swierczinski</span>
+              <a href="https://www.linkedin.com/in/nathanswierczinski/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Cyril Millon</span>
+              <a href="https://www.linkedin.com/in/cyril-millon-824280341/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Antoine Bourdon</span>
+              <a href="https://www.linkedin.com/in/antoine-bourdon-6098ab328/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Enzo Salamitou</span>
+              <a href="https://www.linkedin.com/in/enzo-salamitou/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Arthur Fèvre</span>
+              <a href="https://www.linkedin.com/in/fvrarthur/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Opportunities -->
+        <div class="team-block">
+          <div class="team-block__label">Opportunities</div>
+          <div class="team-block__head">
+            <div class="team-block__head-avatar" style="background:linear-gradient(135deg,var(--color-accent),var(--color-primary));">CR</div>
+            <div>
+              <div class="team-block__head-name">Charles Renault</div>
+              <div class="team-block__head-role">Head of Opportunities</div>
+            </div>
+            <a href="https://www.linkedin.com/in/charles-renault/?locale=fr" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:var(--color-text-muted);" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <div class="team-block__analysts">
+            <div class="analyst-row">
+              <span class="analyst-row__name">Margaux Flasque</span>
+              <a href="https://www.linkedin.com/in/margaux-flasque/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Mahdy Mousslie</span>
+              <a href="https://www.linkedin.com/in/mahdy-mousslie/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Giulio Audone</span>
+              <a href="https://www.linkedin.com/in/giulio-audone-13828a238/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Leonardo Amoretti de Stephanis</span>
+              <a href="https://www.linkedin.com/in/leonardo-amoretti/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Matteo Burello</span>
+              <a href="https://www.linkedin.com/in/matteo-burello-691346290/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Utilities -->
+        <div class="team-block">
+          <div class="team-block__label">Utilities</div>
+          <div class="team-block__head">
+            <div class="team-block__head-avatar" style="background:linear-gradient(135deg,#2a6e4a,#3a9e6a);">RD</div>
+            <div>
+              <div class="team-block__head-name">Rémy Durand</div>
+              <div class="team-block__head-role">Head of Utilities</div>
+            </div>
+            <a href="https://www.linkedin.com/in/r%C3%A9my-durand-078860329/" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:var(--color-text-muted);" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <div class="team-block__analysts">
+            <div class="analyst-row">
+              <span class="analyst-row__name">Samuel Bral</span>
+              <a href="https://www.linkedin.com/in/samuel-bral/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Louis Klemencic</span>
+              <a href="https://www.linkedin.com/in/louis-klemencic-6b3256267/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Karim Turpin</span>
+              <a href="https://www.linkedin.com/in/karim-turpin/?locale=fr" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Antoine Cordier</span>
+              <a href="https://www.linkedin.com/in/antoine-cordier-522868338/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Noémie Chien Kan Foon</span>
+              <a href="https://www.linkedin.com/in/no%C3%A9mie-chien-kan-foon/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Defensive -->
+        <div class="team-block">
+          <div class="team-block__label">Defensive</div>
+          <div class="team-block__head">
+            <div class="team-block__head-avatar" style="background:linear-gradient(135deg,var(--color-primary),#1a3a5e);">MB</div>
+            <div>
+              <div class="team-block__head-name">Marvin Braud</div>
+              <div class="team-block__head-role">Head of Defensive</div>
+            </div>
+            <a href="https://www.linkedin.com/in/marvin-braud/" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:var(--color-text-muted);" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <div class="team-block__analysts">
+            <div class="analyst-row">
+              <span class="analyst-row__name">Théo Lim</span>
+              <a href="https://www.linkedin.com/in/theo-lim-tlm/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Eliot Garnero</span>
+              <a href="https://www.linkedin.com/in/eliot-garnero/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Peter Martin</span>
+              <a href="https://www.linkedin.com/in/peter-martin-07aa32257/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Ashley Klip</span>
+              <a href="https://www.linkedin.com/in/ashley-klip-842436299/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+            <div class="analyst-row">
+              <span class="analyst-row__name">Gaspard Nigon</span>
+              <a href="https://www.linkedin.com/in/gaspard-nigon/" target="_blank" rel="noopener noreferrer" class="analyst-row__li" aria-label="LinkedIn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="text-center mt-8">
-        <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Connect on LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="section" style="background:var(--color-primary);color:var(--color-text-inverse);text-align:center;">
+    <div class="container" style="max-width:var(--content-default);">
+      <h2 style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);margin-bottom:var(--space-3);">Want to join ECI?</h2>
+      <p style="opacity:0.8;margin-bottom:var(--space-6);max-width:45ch;margin-inline:auto;">Applications open every September. Follow us on LinkedIn to stay informed.</p>
+      <div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;">
+        <a href="../pages/join.html" class="btn btn--accent btn--lg">Apply Now</a>
+        <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" target="_blank" rel="noopener noreferrer" class="btn btn--lg" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);">Follow on LinkedIn</a>
       </div>
     </div>
   </section>

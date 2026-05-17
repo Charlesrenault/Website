@@ -620,7 +620,13 @@
   var body     = document.getElementById('pdfModalBody');
   var closeBtn = document.getElementById('pdfModalClose');
 
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+
   function openPdf(pdfUrl, pdfTitle) {
+    if (isMobile) {
+      window.open(pdfUrl, '_blank');
+      return;
+    }
     titleEl.textContent = pdfTitle || 'Pitch Document';
     body.innerHTML = '<iframe src="' + pdfUrl + '" title="' + (pdfTitle || 'Pitch PDF') + '"></iframe>';
     overlay.classList.add('open');

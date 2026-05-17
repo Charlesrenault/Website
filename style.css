@@ -549,16 +549,19 @@
 }
 
 /* ── Scroll Reveal ── */
-.fade-in { opacity: 1; }
-@supports (animation-timeline: scroll()) {
-  .fade-in {
-    opacity: 0;
-    animation: reveal-fade linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 80%;
-  }
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1);
 }
-@keyframes reveal-fade { to { opacity: 1; } }
+.fade-in.will-animate {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* ── Utilities ── */
 .text-center { text-align: center; }
@@ -771,7 +774,7 @@
 /* ── Hero ── */
 .hero {
   position: relative;
-  min-height: 80vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   overflow: hidden;

@@ -40,14 +40,16 @@ function getBasePath() {
 
 // ── Nav Items ──
 const NAV_ITEMS = [
-  { label: 'Home', href: 'index.html' },
+  { label: 'Home',      href: 'index.html' },
   { label: 'About ECI', href: 'pages/about.html' },
-  { label: 'Team', href: 'pages/team.html' },
-  { label: 'Pitches', href: 'pages/pitches.html' },
-  { label: 'Partners', href: 'pages/partners.html' },
-  { label: 'Fund', href: 'pages/fund.html' },
-  { label: 'Join Us', href: 'pages/join.html' },
-  { label: 'Contact', href: 'pages/contact.html' },
+  { label: 'Strategy',  href: 'pages/strategy.html' },
+  { label: 'Team',      href: 'pages/team.html' },
+  { label: 'Pitches',   href: 'pages/pitches.html' },
+  { label: 'Fund',      href: 'pages/fund.html' },
+  { label: 'Resources', href: 'pages/resources.html' },
+  { label: 'Partners',  href: 'pages/partners.html' },
+  { label: 'Join Us',   href: 'pages/join.html' },
+  { label: 'Contact',   href: 'pages/contact.html' },
 ];
 
 // ── Render Header ──
@@ -159,8 +161,8 @@ function toggleMobileNav(open) {
 
 // ── Theme Toggle ──
 (function initTheme() {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  let theme = prefersDark ? 'dark' : 'light';
+  const saved = localStorage.getItem('eci-theme');
+  let theme = saved || 'light'; // default light; user preference saved on toggle
   document.documentElement.setAttribute('data-theme', theme);
   
   document.addEventListener('DOMContentLoaded', () => {
@@ -170,6 +172,7 @@ function toggleMobileNav(open) {
       toggle.addEventListener('click', () => {
         theme = theme === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('eci-theme', theme);
         updateToggleIcon(toggle, theme);
       });
     }

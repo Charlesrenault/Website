@@ -42,7 +42,8 @@ const NAV_ITEMS = [
   { label: 'Home',           href: 'index.html' },
   { label: 'About',          href: 'pages/about.html' },
   { label: 'Team',           href: 'pages/team.html' },
-  { label: 'Pitches & Fund', href: 'pages/pitches.html' },
+  { label: 'Pitches',        href: 'pages/pitches.html' },
+  { label: 'Fund',           href: 'pages/fund.html' },
   { label: 'Join Us',        href: 'pages/join.html' },
   { label: 'Contact',        href: 'pages/contact.html' },
 ];

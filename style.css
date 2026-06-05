@@ -195,14 +195,60 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
   text-decoration: none;
   color: var(--color-text);
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--text-lg);
+  font-weight: 800;
+  font-size: var(--text-xl);
+  letter-spacing: -0.02em;
 }
 .logo svg { width: 36px; height: 36px; }
+
+/* Full lockup — clips the 2000×2000 canvas to just the artwork area.
+   The "ESSEC [sail] ICI" content sits centred at ~30% h / ~70% w of
+   the canvas, so we display the image at 3.3× the desired output size
+   and clip it. Change --logo-h to resize the header logo. */
+:root { --logo-h: 19px; }
+
+.eci-logo-full-wrap {
+  display: inline-block;
+  overflow: hidden;
+  /* width ≈ content fraction of canvas (70%) × image height */
+  width: calc(var(--logo-h) / 0.30 * 0.72);
+  height: var(--logo-h);
+  position: relative;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.eci-logo-full {
+  /* Render the PNG at 1/0.30 the desired height so the 30%-tall
+     content fills the container exactly */
+  position: absolute;
+  height: calc(var(--logo-h) / 0.30);
+  width: auto;
+  /* Centre the artwork inside the clip box */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Icon mark — footer */
+.eci-logo-icon {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+/* Footer (always dark) — brighten so navy parts stay visible */
+.site-footer .eci-logo-icon {
+  filter: brightness(1.5);
+}
+/* Dark-mode header/mobile nav — same treatment for full lockup */
+[data-theme="dark"] .site-header .eci-logo-full,
+[data-theme="dark"] .mobile-nav .eci-logo-full {
+  filter: brightness(1.5);
+}
 
 .nav-desktop {
   display: none;
@@ -794,9 +840,8 @@
 .hero__bg svg {
   width: 100%;
   height: 100%;
-  opacity: 0.06;
+  /* individual elements inside the SVG control their own opacity */
 }
-[data-theme="dark"] .hero__bg svg { opacity: 0.04; }
 
 .hero__content {
   position: relative;

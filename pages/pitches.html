@@ -14,32 +14,32 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.72);
+    background: rgba(0,0,0,0.82);
     z-index: 1000;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
-    backdrop-filter: blur(4px);
+    padding: 0.5rem;
+    backdrop-filter: blur(6px);
   }
   .pdf-modal-overlay.open {
     display: flex;
   }
   .pdf-modal {
     background: var(--color-surface);
-    border-radius: 12px;
+    border-radius: 10px;
     width: 100%;
-    max-width: 960px;
-    max-height: 90vh;
+    max-width: 1200px;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
   }
   .pdf-modal__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.25rem;
+    padding: 0.65rem 1rem;
     border-bottom: 1px solid var(--color-border);
     flex-shrink: 0;
   }
@@ -155,7 +155,8 @@
           </button>
         </div>
 
-        <div class="card card--hover pitch-card fade-in" data-sector="consumer">
+        <div class="card card--hover pitch-card fade-in" data-sector="consumer"
+             data-pdf="../pitches/coca-cola.pdf" data-pdf-title="Coca-Cola — Hold">
           <div class="pitch-card__header">
             <div class="pitch-card__logo">KO</div>
             <div>
@@ -168,10 +169,10 @@
             <span class="tag tag--hold">Hold</span>
             <span>Mar 2025 · ECI Research</span>
           </div>
-          <a class="pitch-card__pdf-btn" href="../pitches/coca-cola.pptx" download aria-label="Download pitch deck">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download Deck
-          </a>
+          <button class="pitch-card__pdf-btn" aria-label="Open pitch PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Pitch
+          </button>
         </div>
 
         <div class="card card--hover pitch-card fade-in" data-sector="consumer"
@@ -197,7 +198,7 @@
         <div class="card card--hover pitch-card fade-in" data-sector="healthcare"
              data-pdf="../pitches/healthcare-sector.pdf" data-pdf-title="Healthcare Sector Coverage">
           <div class="pitch-card__header">
-            <div class="pitch-card__logo">SNY</div>
+            <div class="pitch-card__logo">HC</div>
             <div>
               <div class="pitch-card__company">Healthcare Sector Coverage</div>
               <div class="pitch-card__sector">Healthcare — Pharma &amp; Biotech</div>
@@ -314,8 +315,17 @@
           </button>
         </div>
 
+      </div>
+
+      <!-- ── Research In Progress ── -->
+      <div style="margin-top:var(--space-12);margin-bottom:var(--space-4);">
+        <p class="section-label">In Progress</p>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-base);color:var(--color-text-muted);margin-top:var(--space-1);">Research currently underway — coming soon</h3>
+      </div>
+      <div class="grid-3" style="margin-bottom:var(--space-16);">
+
         <!-- Iran Research — In Progress -->
-        <div class="card pitch-card fade-in" data-sector="energy" style="opacity:1;position:relative;overflow:hidden;">
+        <div class="card pitch-card fade-in" data-sector="energy" style="opacity:0.65;position:relative;overflow:hidden;pointer-events:none;">
           <div style="position:absolute;top:12px;right:12px;">
             <span class="tag" style="background:var(--color-surface-2);color:var(--color-text-muted);font-size:10px;letter-spacing:.06em;padding:3px 8px;border-radius:999px;font-weight:700;">IN PROGRESS</span>
           </div>
@@ -338,7 +348,7 @@
         </div>
 
         <!-- EV / Electric Vehicles Research — In Progress -->
-        <div class="card pitch-card fade-in" data-sector="technology" style="opacity:1;position:relative;overflow:hidden;">
+        <div class="card pitch-card fade-in" data-sector="technology" style="opacity:0.65;position:relative;overflow:hidden;pointer-events:none;">
           <div style="position:absolute;top:12px;right:12px;">
             <span class="tag" style="background:var(--color-surface-2);color:var(--color-text-muted);font-size:10px;letter-spacing:.06em;padding:3px 8px;border-radius:999px;font-weight:700;">IN PROGRESS</span>
           </div>
@@ -388,7 +398,8 @@
           </button>
         </div>
 
-        <div class="card card--hover pitch-card fade-in" data-sector="technology">
+        <div class="card card--hover pitch-card fade-in" data-sector="technology"
+             data-pdf="../pitches/nvidia.pdf" data-pdf-title="Nvidia — Buy">
           <div class="pitch-card__header">
             <div class="pitch-card__logo">NVDA</div>
             <div>
@@ -401,10 +412,10 @@
             <span class="tag tag--buy">Buy</span>
             <span>Mar 2024 · ECI Research</span>
           </div>
-          <a class="pitch-card__pdf-btn" href="../pitches/nvidia.pptx" download aria-label="Download pitch deck">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download Deck
-          </a>
+          <button class="pitch-card__pdf-btn" aria-label="Open pitch PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Pitch
+          </button>
         </div>
 
         <div class="card card--hover pitch-card fade-in" data-sector="financials"
@@ -487,7 +498,8 @@
           </button>
         </div>
 
-        <div class="card card--hover pitch-card fade-in" data-sector="industrials">
+        <div class="card card--hover pitch-card fade-in" data-sector="industrials"
+             data-pdf="../pitches/boeing.pdf" data-pdf-title="Boeing — Sell">
           <div class="pitch-card__header">
             <div class="pitch-card__logo">BA</div>
             <div>
@@ -500,13 +512,14 @@
             <span class="tag tag--sell">Sell</span>
             <span>Apr 2024 · ECI Research</span>
           </div>
-          <a class="pitch-card__pdf-btn" href="../pitches/boeing.pptx" download aria-label="Download pitch deck">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download Deck
-          </a>
+          <button class="pitch-card__pdf-btn" aria-label="Open pitch PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Pitch
+          </button>
         </div>
 
-        <div class="card card--hover pitch-card fade-in" data-sector="energy">
+        <div class="card card--hover pitch-card fade-in" data-sector="energy"
+             data-pdf="../pitches/targa.pdf" data-pdf-title="Targa Resources — Buy">
           <div class="pitch-card__header">
             <div class="pitch-card__logo">TRGP</div>
             <div>
@@ -519,10 +532,10 @@
             <span class="tag tag--buy">Buy</span>
             <span>Nov 2024 · ECI Research</span>
           </div>
-          <a class="pitch-card__pdf-btn" href="../pitches/targa.pptx" download aria-label="Download pitch deck">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download Deck
-          </a>
+          <button class="pitch-card__pdf-btn" aria-label="Open pitch PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Pitch
+          </button>
         </div>
 
         <div class="card card--hover pitch-card fade-in" data-sector="energy"
@@ -592,13 +605,13 @@
         </svg>
       </button>
     </div>
-    <div class="pdf-modal__body" id="pdfModalBody" style="height:75vh;">
+    <div class="pdf-modal__body" id="pdfModalBody" style="flex:1;min-height:0;">
       <!-- iframe injected by JS -->
     </div>
   </div>
 </div>
 
-<script src="../components.js"></script>
+<script src="../components.js?v=3"></script>
 <script>
 (function () {
   // ── Sector filter ──

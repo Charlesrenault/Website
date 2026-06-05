@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "ECI Website",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "3000"],
+      "name": "eci-website",
+      "runtimeExecutable": "/usr/bin/python3",
+      "runtimeArgs": ["/tmp/eci-serve.py"],
       "port": 3000
     }
   ]

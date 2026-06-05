@@ -4,10 +4,145 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Fund — ECI</title>
-<meta name="description" content="Track the performance of the ESSEC Capital Investments student fund. Quarterly results coming after our first full year of management.">
+<meta name="description" content="Track the performance of the ESSEC Capital Investments student fund — live holdings, monthly returns, and benchmark comparison.">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../base.css">
 <link rel="stylesheet" href="../style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ── Fund page extras ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+@media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .kpi-grid { grid-template-columns: 1fr 1fr; } }
+
+.kpi-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+  text-align: center;
+}
+.kpi-card__value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-2xl);
+  color: var(--color-text);
+  line-height: 1.1;
+  margin-bottom: var(--space-1);
+}
+.kpi-card__value.positive { color: #16a34a; }
+.kpi-card__value.negative { color: #dc2626; }
+.kpi-card__label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.kpi-card__sub {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+@media (max-width: 860px) { .charts-grid { grid-template-columns: 1fr; } }
+
+.chart-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+.chart-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-base);
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+.chart-card__sub {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+/* Holdings table */
+.holdings-table { width: 100%; border-collapse: collapse; }
+.holdings-table th {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 2px solid var(--color-border);
+  text-align: right;
+}
+.holdings-table th:first-child { text-align: left; }
+.holdings-table td {
+  font-size: var(--text-sm);
+  padding: var(--space-3) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  text-align: right;
+  color: var(--color-text);
+}
+.holdings-table td:first-child { text-align: left; font-weight: 600; }
+.holdings-table tr:last-child td { border-bottom: none; font-weight: 700; background: var(--color-surface-2); }
+.holdings-table .positive { color: #16a34a; font-weight: 600; }
+.holdings-table .negative { color: #dc2626; font-weight: 600; }
+
+.ticker-chip {
+  display: inline-block;
+  background: oklch(from var(--color-accent) l c h / 0.12);
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-right: var(--space-2);
+  letter-spacing: 0.04em;
+}
+
+/* Performance table */
+.perf-table-real { width: 100%; border-collapse: collapse; }
+.perf-table-real th {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 2px solid var(--color-border);
+  text-align: right;
+}
+.perf-table-real th:first-child { text-align: left; }
+.perf-table-real td {
+  font-size: var(--text-sm);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  text-align: right;
+}
+.perf-table-real td:first-child { text-align: left; font-weight: 600; }
+.perf-table-real .positive { color: #16a34a; font-weight: 600; }
+.perf-table-real .negative { color: #dc2626; font-weight: 600; }
+.updated-note {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: right;
+  margin-top: var(--space-3);
+}
+</style>
 </head>
 <body>
 <div id="header-slot"></div>
@@ -16,63 +151,131 @@
   <section class="page-header">
     <p class="section-label" style="color:var(--color-accent);">Live Portfolio</p>
     <h1 class="page-header__title">The ECI Fund</h1>
-    <p class="page-header__desc">A real investment fund managed by ESSEC students. Quarterly performance results will be published here once we complete our first year of management.</p>
+    <p class="page-header__desc">A real equity portfolio managed by ESSEC students — every position backed by formal research, presented and voted on by the full team.</p>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════
-       PORTFOLIO DASHBOARD EMBED
-       Once your dashboard is ready, replace the placeholder
-       below with your actual embed URL (e.g. a public
-       Google Data Studio / Looker Studio report, a Notion
-       embed, a custom React app hosted on Netlify, etc.).
-
-       Example — Looker Studio:
-         src="https://lookerstudio.google.com/embed/reporting/YOUR_REPORT_ID/page/p_xxxx"
-
-       Example — Custom app:
-         src="https://your-dashboard.netlify.app"
-
-       Set DASHBOARD_URL to your URL, or leave it empty to
-       show the "coming soon" card instead.
-  ════════════════════════════════════════════════════════ -->
-  <section class="section" style="background:var(--color-surface-2);">
+  <!-- ── KPI Cards ── -->
+  <section class="section" style="padding-bottom:0;">
     <div class="container">
-      <div class="text-center mb-12">
-        <p class="section-label">Live Portfolio</p>
-        <h2 class="section-title" style="margin-inline:auto;">Portfolio Dashboard</h2>
-        <p class="section-desc" style="margin-inline:auto;">Real-time holdings, sector allocation, and performance attribution — updated automatically from our tracking system.</p>
-      </div>
-
-      <!-- Dashboard embed — swap src once ready -->
-      <div id="dashboardWrapper" style="border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.1);min-height:520px;background:var(--color-surface);">
-
-        <!-- ↓ COMING-SOON PLACEHOLDER — remove this block when dashboard is live ↓ -->
-        <div id="dashboardPlaceholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:520px;gap:1rem;padding:2rem;text-align:center;color:var(--color-text-muted);">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="opacity:0.4;">
-            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
-          </svg>
-          <h3 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-lg);color:var(--color-text-primary);margin:0;">Dashboard Coming Soon</h3>
-          <p style="max-width:42ch;font-size:var(--text-sm);line-height:1.6;margin:0;">We're building a live portfolio dashboard. Once it's ready, paste its URL into <code>fund.html</code> at the marked comment to embed it here automatically.</p>
+      <div class="kpi-grid fade-in">
+        <div class="kpi-card">
+          <div class="kpi-card__value">€779.97</div>
+          <div class="kpi-card__label">Portfolio NAV</div>
+          <div class="kpi-card__sub">as of May 2026</div>
         </div>
-        <!-- ↑ Remove the block above once the iframe below is uncommented ↑ -->
+        <div class="kpi-card">
+          <div class="kpi-card__value positive">+8.00%</div>
+          <div class="kpi-card__label">Cumulative Return</div>
+          <div class="kpi-card__sub">since Oct 2025 inception</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__value positive">+2.22 pp</div>
+          <div class="kpi-card__label">vs MSCI World</div>
+          <div class="kpi-card__sub">+8.00% vs +5.78%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__value">3</div>
+          <div class="kpi-card__label">Active Positions</div>
+          <div class="kpi-card__sub">NEX · KO · MS</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- ↓ UNCOMMENT and fill in your dashboard URL when ready ↓
-        <iframe
-          id="portfolioDashboard"
-          src="PASTE_YOUR_DASHBOARD_URL_HERE"
-          title="ECI Portfolio Dashboard"
-          style="width:100%;height:640px;border:none;display:block;"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-        ↑ UNCOMMENT the block above when your dashboard is live ↑ -->
+  <!-- ── Charts ── -->
+  <section class="section">
+    <div class="container">
+      <div class="charts-grid fade-in">
+
+        <!-- Cumulative Return line chart -->
+        <div class="chart-card">
+          <div class="chart-card__title">Cumulative Return</div>
+          <div class="chart-card__sub">ECI Fund vs MSCI World — indexed from inception (Oct 2025)</div>
+          <canvas id="cumulChart" height="220"></canvas>
+        </div>
+
+        <!-- Monthly bar chart -->
+        <div class="chart-card">
+          <div class="chart-card__title">Monthly Returns</div>
+          <div class="chart-card__sub">ECI Fund period return per month</div>
+          <canvas id="monthlyChart" height="220"></canvas>
+        </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Fund overview -->
-  <section class="section">
+  <!-- ── Current Holdings ── -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="chart-card fade-in">
+        <div class="chart-card__title">Current Holdings</div>
+        <div class="chart-card__sub">As of May 2026 · FX rate: 1.08 USD/EUR</div>
+        <div style="overflow-x:auto;">
+          <table class="holdings-table">
+            <thead>
+              <tr>
+                <th>Position</th>
+                <th>Shares</th>
+                <th>Last Price</th>
+                <th>Market Value</th>
+                <th>Cost Basis</th>
+                <th>Unreal. P&amp;L</th>
+                <th>Return</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="ticker-chip">NEX</span>Nexans SA</td>
+                <td>1</td>
+                <td>€160.20</td>
+                <td>€160.20</td>
+                <td>€132.00</td>
+                <td class="positive">+€28.20</td>
+                <td class="positive">+21.36%</td>
+                <td>31.91%</td>
+              </tr>
+              <tr>
+                <td><span class="ticker-chip">MS</span>Morgan Stanley</td>
+                <td>1.008</td>
+                <td>$210.14</td>
+                <td>€196.05</td>
+                <td>€174.79</td>
+                <td class="positive">+€21.27</td>
+                <td class="positive">+12.17%</td>
+                <td>39.05%</td>
+              </tr>
+              <tr>
+                <td><span class="ticker-chip">KO</span>Coca-Cola</td>
+                <td>2</td>
+                <td>$78.76</td>
+                <td>€145.85</td>
+                <td>€146.80</td>
+                <td class="negative">−€0.94</td>
+                <td class="negative">−0.64%</td>
+                <td>29.05%</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>—</td>
+                <td>—</td>
+                <td>€502.10</td>
+                <td>€453.58</td>
+                <td class="positive">+€48.52</td>
+                <td class="positive">+10.70%</td>
+                <td>100%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="updated-note">Updated monthly by the ECI team · Cash position: €301.38</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How It Works + Process ── -->
+  <section class="section" style="background:var(--color-surface-2);">
     <div class="container container--narrow">
       <div class="grid-2" style="gap:var(--space-12);align-items:start;">
         <div class="fade-in">
@@ -107,67 +310,90 @@
     </div>
   </section>
 
-  <!-- Coming Soon Performance -->
-  <section class="section" style="background:var(--color-surface-2);">
+  <!-- ── Monthly Performance Table ── -->
+  <section class="section">
     <div class="container">
       <div class="text-center mb-12">
-        <p class="section-label">Performance</p>
-        <h2 class="section-title" style="margin-inline:auto;">Quarterly Results</h2>
-        <p class="section-desc" style="margin-inline:auto;">Full performance data will be published after our first complete year of active fund management.</p>
+        <p class="section-label">Track Record</p>
+        <h2 class="section-title" style="margin-inline:auto;">Monthly Performance</h2>
+        <p class="section-desc" style="margin-inline:auto;">Deposit-adjusted returns since inception. Cumulative returns are time-weighted to exclude the effect of capital inflows.</p>
       </div>
-
-      <div class="coming-soon fade-in">
-        <svg class="coming-soon__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M3 3v18h18"/>
-          <path d="M7 16l4-4 4 4 4-4"/>
-        </svg>
-        <h3 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-lg);margin-bottom:var(--space-2);">Coming After Year 1</h3>
-        <p style="font-size:var(--text-sm);color:var(--color-text-muted);max-width:44ch;text-align:center;line-height:1.6;">Once we complete our first full year of active portfolio management, this page will display quarterly returns, benchmark comparison vs CAC 40 / STOXX 600, top holdings, and Sharpe ratio — updated every quarter.</p>
-
-        <div style="margin-top:var(--space-8);display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-3);">
-          <div class="card" style="min-width:140px;text-align:center;padding:var(--space-4);">
-            <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);color:var(--color-accent);">—</div>
-            <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;">YTD Return</div>
-          </div>
-          <div class="card" style="min-width:140px;text-align:center;padding:var(--space-4);">
-            <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);color:var(--color-accent);">—</div>
-            <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;">vs Benchmark</div>
-          </div>
-          <div class="card" style="min-width:140px;text-align:center;padding:var(--space-4);">
-            <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);color:var(--color-accent);">—</div>
-            <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;">Positions</div>
-          </div>
-          <div class="card" style="min-width:140px;text-align:center;padding:var(--space-4);">
-            <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);color:var(--color-accent);">—</div>
-            <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em;">Sharpe Ratio</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Placeholder table -->
-      <div class="perf-table mt-8 fade-in" style="opacity:0.35;pointer-events:none;">
-        <table style="width:100%;border-collapse:collapse;">
+      <div class="chart-card fade-in" style="overflow-x:auto;">
+        <table class="perf-table-real">
           <thead>
             <tr>
-              <th>Quarter</th>
-              <th>ECI Fund</th>
-              <th>CAC 40</th>
-              <th>STOXX 600</th>
-              <th>Alpha</th>
+              <th>Month</th>
+              <th>Period Return</th>
+              <th>Cumulative Return</th>
+              <th>MSCI World</th>
+              <th>Active Return</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Q1 2026</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-            <tr><td>Q2 2026</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-            <tr><td>Q3 2026</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-            <tr><td>Q4 2026</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr>
+              <td>Oct 2025</td>
+              <td>—</td>
+              <td>0.00%</td>
+              <td class="negative">−2.10%</td>
+              <td class="positive">+2.10 pp</td>
+            </tr>
+            <tr>
+              <td>Nov 2025</td>
+              <td class="negative">−1.00%</td>
+              <td class="negative">−1.00%</td>
+              <td class="positive">+1.62%</td>
+              <td class="negative">−2.62 pp</td>
+            </tr>
+            <tr>
+              <td>Dec 2025</td>
+              <td class="negative">−0.29%</td>
+              <td class="negative">−0.29%</td>
+              <td class="negative">−1.02%</td>
+              <td class="positive">+0.73 pp</td>
+            </tr>
+            <tr>
+              <td>Jan 2026</td>
+              <td class="negative">−0.93%</td>
+              <td class="negative">−1.22%</td>
+              <td class="positive">+2.14%</td>
+              <td class="negative">−3.36 pp</td>
+            </tr>
+            <tr>
+              <td>Feb 2026</td>
+              <td class="negative">−2.24%</td>
+              <td class="negative">−3.41%</td>
+              <td class="positive">+0.71%</td>
+              <td class="negative">−4.12 pp</td>
+            </tr>
+            <tr>
+              <td>Mar 2026</td>
+              <td class="positive">+0.43%</td>
+              <td class="negative">−2.99%</td>
+              <td class="negative">−2.81%</td>
+              <td class="positive">+0.18 pp</td>
+            </tr>
+            <tr>
+              <td>Apr 2026</td>
+              <td class="positive">+5.85%</td>
+              <td class="positive">+2.72%</td>
+              <td class="positive">+1.17%</td>
+              <td class="positive">+1.55 pp</td>
+            </tr>
+            <tr>
+              <td>May 2026</td>
+              <td class="positive">+5.12%</td>
+              <td class="positive">+8.00%</td>
+              <td class="positive">+5.78%</td>
+              <td class="positive">+2.22 pp</td>
+            </tr>
           </tbody>
         </table>
+        <p class="updated-note">MSCI World (USD, net returns) used as benchmark · Data updated monthly</p>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- ── CTA ── -->
   <section class="section" style="text-align:center;">
     <div class="container" style="max-width:var(--content-default);">
       <h2 style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);margin-bottom:var(--space-3);">Want to be part of it?</h2>
@@ -181,6 +407,125 @@
 
 </main>
 <div id="footer-slot"></div>
-<script src="../components.js"></script>
+<script src="../components.js?v=3"></script>
+<script>
+/* ═══════════════════════════════════════════════
+   ECI FUND DASHBOARD — DATA
+   Update this block each month end.
+   Add a new entry to each array in chronological order.
+   ═══════════════════════════════════════════════ */
+const FUND_DATA = {
+  labels: ['Oct 2025','Nov 2025','Dec 2025','Jan 2026','Feb 2026','Mar 2026','Apr 2026','May 2026'],
+
+  // Deposit-adjusted cumulative returns (%) — ECI Fund
+  eciCumulative: [0.00, -1.00, -0.29, -1.22, -3.41, -2.99, 2.72, 8.00],
+
+  // MSCI World cumulative (%) — computed from monthly period returns
+  msciCumulative: [-2.10, 1.62, -1.02, 2.14, 0.71, -2.81, 1.17, 5.78],
+
+  // ECI monthly period returns (%)
+  eciMonthly: [0.00, -1.00, -0.29, -0.93, -2.24, 0.43, 5.85, 5.12]
+};
+
+/* ── Shared chart theme ── */
+const ROOT = getComputedStyle(document.documentElement);
+const C_ACCENT  = '#c9a84c';
+const C_MUTED   = 'rgba(120,130,150,0.7)';
+const C_GRID    = 'rgba(150,160,170,0.12)';
+const C_TEXT    = ROOT.getPropertyValue('--color-text-muted').trim() || '#888';
+const FONT      = "'Satoshi', 'Inter', sans-serif";
+
+Chart.defaults.font.family = FONT;
+Chart.defaults.font.size   = 11;
+Chart.defaults.color       = C_TEXT;
+
+/* ── 1. Cumulative Return Line Chart ── */
+new Chart(document.getElementById('cumulChart'), {
+  type: 'line',
+  data: {
+    labels: FUND_DATA.labels,
+    datasets: [
+      {
+        label: 'ECI Fund',
+        data: FUND_DATA.eciCumulative,
+        borderColor: C_ACCENT,
+        backgroundColor: 'rgba(201,168,76,0.08)',
+        borderWidth: 2.5,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointBackgroundColor: C_ACCENT,
+        fill: true,
+        tension: 0.3
+      },
+      {
+        label: 'MSCI World',
+        data: FUND_DATA.msciCumulative,
+        borderColor: C_MUTED,
+        backgroundColor: 'transparent',
+        borderWidth: 1.5,
+        borderDash: [5, 4],
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        pointBackgroundColor: C_MUTED,
+        fill: false,
+        tension: 0.3
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { boxWidth: 12, padding: 16 } },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y > 0 ? '+' : ''}${ctx.parsed.y.toFixed(2)}%`
+        }
+      }
+    },
+    scales: {
+      x: { grid: { color: C_GRID }, ticks: { maxRotation: 30 } },
+      y: {
+        grid: { color: C_GRID },
+        ticks: { callback: v => (v > 0 ? '+' : '') + v.toFixed(1) + '%' }
+      }
+    }
+  }
+});
+
+/* ── 2. Monthly Returns Bar Chart ── */
+new Chart(document.getElementById('monthlyChart'), {
+  type: 'bar',
+  data: {
+    labels: FUND_DATA.labels,
+    datasets: [{
+      label: 'Monthly Return',
+      data: FUND_DATA.eciMonthly,
+      backgroundColor: FUND_DATA.eciMonthly.map(v => v >= 0 ? 'rgba(22,163,74,0.75)' : 'rgba(220,38,38,0.7)'),
+      borderColor:     FUND_DATA.eciMonthly.map(v => v >= 0 ? '#16a34a' : '#dc2626'),
+      borderWidth: 1.5,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.parsed.y > 0 ? '+' : ''}${ctx.parsed.y.toFixed(2)}%`
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { maxRotation: 30 } },
+      y: {
+        grid: { color: C_GRID },
+        ticks: { callback: v => (v > 0 ? '+' : '') + v.toFixed(1) + '%' }
+      }
+    }
+  }
+});
+</script>
 </body>
 </html>

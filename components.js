@@ -2,20 +2,19 @@
    ECI — Shared Components (Header, Footer, Theme, Nav)
    ═══════════════════════════════════════════════════════ */
 
-// ── SVG Logo — ECI layered-sail icon ──
-const ECI_LOGO = `<svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ECI Logo">
-  <defs>
-    <linearGradient id="eci-g1" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0%" stop-color="#113d63"/>
-      <stop offset="100%" stop-color="#94b8d8"/>
-    </linearGradient>
-  </defs>
-  <!-- Layered sail / rocket shape matching ECI brand -->
-  <path d="M7 31 L18 7 L23 12 L13 31 Z" fill="#113d63"/>
-  <path d="M12 31 L21 11 L26 16 L18 31 Z" fill="#485059" opacity="0.85"/>
-  <path d="M17 31 L24 15 L29 20 L23 31 Z" fill="#5e7c9e" opacity="0.9"/>
-  <path d="M20 31 L26 18 L30 22 L27 31 Z" fill="#94b8d8" opacity="0.75"/>
-</svg>`;
+// ── Logo helpers — transparent PNGs ──
+// The full-lockup PNG is 2000×2000 with the "ESSEC [sail] ICI" content
+// centred in the canvas (~30% height, ~70% width). We wrap it in a
+// clipping container so only the live artwork shows — no dead whitespace.
+function eciLogoFull(base) {
+  return `<span class="eci-logo-full-wrap" aria-hidden="true">
+    <img src="${base}logo-full-remove-bg-io.png" alt="ESSEC Capital Investments" class="eci-logo-full">
+  </span>`;
+}
+// Footer: sail mark icon only
+function eciLogoIcon(base) {
+  return `<img src="${base}logo-icon-remove-bg-io.png" alt="" aria-hidden="true" class="eci-logo-icon">`;
+}
 
 const LINKEDIN_ICON = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`;
 const INSTAGRAM_ICON = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`;
@@ -40,16 +39,12 @@ function getBasePath() {
 
 // ── Nav Items ──
 const NAV_ITEMS = [
-  { label: 'Home',      href: 'index.html' },
-  { label: 'About ECI', href: 'pages/about.html' },
-  { label: 'Strategy',  href: 'pages/strategy.html' },
-  { label: 'Team',      href: 'pages/team.html' },
-  { label: 'Pitches',   href: 'pages/pitches.html' },
-  { label: 'Fund',      href: 'pages/fund.html' },
-  { label: 'Resources', href: 'pages/resources.html' },
-  { label: 'Partners',  href: 'pages/partners.html' },
-  { label: 'Join Us',   href: 'pages/join.html' },
-  { label: 'Contact',   href: 'pages/contact.html' },
+  { label: 'Home',           href: 'index.html' },
+  { label: 'About',          href: 'pages/about.html' },
+  { label: 'Team',           href: 'pages/team.html' },
+  { label: 'Pitches & Fund', href: 'pages/pitches.html' },
+  { label: 'Join Us',        href: 'pages/join.html' },
+  { label: 'Contact',        href: 'pages/contact.html' },
 ];
 
 // ── Render Header ──
@@ -73,8 +68,7 @@ function renderHeader() {
   <header class="site-header" id="site-header">
     <div class="header-inner">
       <a href="${base}index.html" class="logo" aria-label="ECI Home">
-        ${ECI_LOGO}
-        <span>ECI</span>
+        ${eciLogoFull(base)}
       </a>
       <nav aria-label="Main navigation">
         <ul class="nav-desktop" role="list">${navLinks}</ul>
@@ -91,7 +85,7 @@ function renderHeader() {
   </header>
   <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
     <div class="mobile-nav-header">
-      <a href="${base}index.html" class="logo" aria-label="ECI Home">${ECI_LOGO}<span>ECI</span></a>
+      <a href="${base}index.html" class="logo" aria-label="ECI Home">${eciLogoFull(base)}</a>
       <button class="mobile-menu-btn" aria-label="Close menu" onclick="toggleMobileNav(false)">${CLOSE_ICON}</button>
     </div>
     ${mobileLinks}
@@ -106,11 +100,11 @@ function renderFooter() {
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col footer-brand">
-          <div class="logo mb-4" style="color:inherit">${ECI_LOGO}<span>ECI</span></div>
+          <div class="logo mb-4" style="color:inherit;gap:var(--space-2);">${eciLogoIcon(base)}<span>ECI</span></div>
           <p>ESSEC Capital Investments is a student-led investment association at ESSEC Business School dedicated to equity research, stock pitches, and financial education.</p>
           <div class="footer-social mt-4">
             <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">${LINKEDIN_ICON}</a>
-            <a href="mailto:eci@essec.edu" aria-label="Email">${MAIL_ICON}</a>
+            <a href="mailto:esseccapitalinvestments@gmail.com" aria-label="Email">${MAIL_ICON}</a>
           </div>
         </div>
         <div class="footer-col">
@@ -160,38 +154,40 @@ function toggleMobileNav(open) {
 }
 
 // ── Theme Toggle ──
-(function initTheme() {
-  const saved = localStorage.getItem('eci-theme');
-  let theme = saved || 'light'; // default light; user preference saved on toggle
+// ── Theme ── (apply immediately so no flash)
+var _eciTheme = (function() {
+  var saved = localStorage.getItem('eci-theme');
+  var theme = saved || 'light';
   document.documentElement.setAttribute('data-theme', theme);
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.querySelector('[data-theme-toggle]');
-    if (toggle) {
-      updateToggleIcon(toggle, theme);
-      toggle.addEventListener('click', () => {
-        theme = theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('eci-theme', theme);
-        updateToggleIcon(toggle, theme);
-      });
-    }
 
-    // Scroll header shadow
-    const header = document.getElementById('site-header');
-    if (header) {
-      window.addEventListener('scroll', () => {
-        header.classList.toggle('site-header--scrolled', window.scrollY > 10);
-      }, { passive: true });
-    }
-  });
-  
   function updateToggleIcon(btn, th) {
     btn.innerHTML = th === 'dark'
       ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
       : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-    btn.setAttribute('aria-label', `Switch to ${th === 'dark' ? 'light' : 'dark'} mode`);
+    btn.setAttribute('aria-label', 'Switch to ' + (th === 'dark' ? 'light' : 'dark') + ' mode');
   }
+
+  // Called after header is injected
+  function initToggle() {
+    var toggle = document.querySelector('[data-theme-toggle]');
+    if (!toggle) return;
+    updateToggleIcon(toggle, theme);
+    toggle.addEventListener('click', function() {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('eci-theme', theme);
+      updateToggleIcon(toggle, theme);
+    });
+    // Scroll header shadow
+    var header = document.getElementById('site-header');
+    if (header) {
+      window.addEventListener('scroll', function() {
+        header.classList.toggle('site-header--scrolled', window.scrollY > 10);
+      }, { passive: true });
+    }
+  }
+
+  return { initToggle: initToggle };
 })();
 
 // ── FAQ Accordion ──
@@ -246,11 +242,14 @@ function initScrollReveal() {
 }
 
 // ── Inject Header/Footer ──
-document.addEventListener('DOMContentLoaded', () => {
-  const headerSlot = document.getElementById('header-slot');
-  const footerSlot = document.getElementById('footer-slot');
+document.addEventListener('DOMContentLoaded', function() {
+  var headerSlot = document.getElementById('header-slot');
+  var footerSlot = document.getElementById('footer-slot');
   if (headerSlot) headerSlot.innerHTML = renderHeader();
   if (footerSlot) footerSlot.innerHTML = renderFooter();
+
+  // Wire theme toggle AFTER header is in the DOM
+  _eciTheme.initToggle();
 
   // Re-init FAQ if present
   if (document.querySelector('.faq-item')) initFAQ();

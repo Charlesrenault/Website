@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Outcomes — ECI</title>
+<meta name="description" content="Discover where ECI alumni have gone — internships and full-time roles at leading investment banks, asset managers, and financial institutions.">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="../style.css">
+<style>
+  /* ── Alumni Card ── */
+  .alumni-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .alumni-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .alumni-card__top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .alumni-card__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .alumni-card__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .alumni-card__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+  }
+  .alumni-card__cohort {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-top: 1px;
+  }
+  .alumni-card__role {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+  .alumni-card__role strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+  .alumni-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+  .alumni-card__type {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .alumni-card__type--internship {
+    background: oklch(from var(--color-accent) l c h / 0.12);
+    color: var(--color-accent);
+  }
+  .alumni-card__type--fulltime {
+    background: oklch(from var(--color-success) l c h / 0.12);
+    color: var(--color-success);
+  }
+  .alumni-card__linkedin {
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    transition: color .15s;
+  }
+  .alumni-card__linkedin:hover { color: var(--color-primary); }
+
+  /* ── Destination strip ── */
+  .dest-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    justify-content: center;
+  }
+  .dest-chip {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  /* ── Placeholder photo frame ── */
+  .photo-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--color-surface-2);
+    border-radius: 50%;
+    border: 2px dashed var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+
+  /* Filter bar */
+  .alumni-filter { display:flex; flex-wrap:wrap; gap:var(--space-2); margin-bottom:var(--space-8); }
+  .alumni-filter__btn {
+    padding: var(--space-1) var(--space-4);
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: all .15s;
+  }
+  .alumni-filter__btn.active, .alumni-filter__btn:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+<div id="header-slot"></div>
+<main id="main">
+
+  <section class="page-header">
+    <p class="section-label" style="color:var(--color-accent);">ECI Network</p>
+    <h1 class="page-header__title">Career Outcomes</h1>
+    <p class="page-header__desc">ECI is a launchpad. See where our alumni have gone — internships and full-time roles at the world's leading financial institutions.</p>
+  </section>
+
+  <!-- Intro statement -->
+  <section class="section" style="padding-block:var(--space-10);">
+    <div class="container container--narrow">
+      <div class="card fade-in" style="text-align:center;padding:var(--space-10);">
+        <p style="font-size:var(--text-lg);color:var(--color-text-muted);line-height:1.7;max-width:58ch;margin-inline:auto;">ECI members go on to careers at leading financial institutions across investment banking, asset management, private equity, and consulting — in Paris, London, and beyond.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destinations strip -->
+  <section style="background:var(--color-surface-2);padding:var(--space-8) 0;">
+    <div class="container">
+      <p class="section-label text-center" style="margin-bottom:var(--space-5);">Where ECI Alumni Have Worked</p>
+      <div class="dest-strip">
+        <div class="dest-chip">Goldman Sachs</div>
+        <div class="dest-chip">BNP Paribas</div>
+        <div class="dest-chip">Société Générale</div>
+        <div class="dest-chip">Lazard</div>
+        <div class="dest-chip">Rothschild &amp; Co</div>
+        <div class="dest-chip">AXA IM</div>
+        <div class="dest-chip">Amundi</div>
+        <div class="dest-chip">Natixis</div>
+        <div class="dest-chip">BCG</div>
+        <div class="dest-chip">McKinsey</div>
+        <div class="dest-chip">J.P. Morgan</div>
+        <div class="dest-chip">Crédit Agricole CIB</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alumni grid -->
+  <section class="section">
+    <div class="container">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:var(--space-4);margin-bottom:var(--space-6);">
+        <div>
+          <p class="section-label">Class of 2024 &amp; 2025</p>
+          <h2 class="section-title">Alumni Spotlights</h2>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="alumni-filter" id="alumniFilters">
+        <button class="alumni-filter__btn active" data-filter="all">All</button>
+        <button class="alumni-filter__btn" data-filter="internship">Internship</button>
+        <button class="alumni-filter__btn" data-filter="fulltime">Full-time</button>
+        <button class="alumni-filter__btn" data-filter="ib">Investment Banking</button>
+        <button class="alumni-filter__btn" data-filter="am">Asset Management</button>
+        <button class="alumni-filter__btn" data-filter="other">Consulting / Other</button>
+      </div>
+
+      <div class="grid-3 fade-in" id="alumniGrid">
+
+        <!-- ── PLACEHOLDER CARDS — replace with real alumni ── -->
+
+        <div class="alumni-card" data-type="fulltime" data-sector="ib">
+          <div class="alumni-card__top">
+            <div class="alumni-card__avatar">
+              <!-- Replace with: <img src="../images/alumni/firstname-lastname.jpg" alt="Name"> -->
+              AB
+            </div>
+            <div>
+              <div class="alumni-card__name">Alumni Name</div>
+              <div class="alumni-card__cohort">ECI 2023/24 · Opportunities</div>
+            </div>
+          </div>
+          <p class="alumni-card__role"><strong>Analyst</strong> — Investment Banking Division<br>Goldman Sachs, Paris</p>
+          <div class="alumni-card__footer">
+            <span class="alumni-card__type alumni-card__type--fulltime">Full-time</span>
+            <a href="#" class="alumni-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="alumni-card" data-type="internship" data-sector="am">
+          <div class="alumni-card__top">
+            <div class="alumni-card__avatar" style="background:linear-gradient(135deg,#485059,var(--color-accent));">
+              CD
+            </div>
+            <div>
+              <div class="alumni-card__name">Alumni Name</div>
+              <div class="alumni-card__cohort">ECI 2023/24 · TMT / FIG</div>
+            </div>
+          </div>
+          <p class="alumni-card__role"><strong>Investment Management Intern</strong><br>AXA Investment Managers, Paris</p>
+          <div class="alumni-card__footer">
+            <span class="alumni-card__type alumni-card__type--internship">Internship</span>
+            <a href="#" class="alumni-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="alumni-card" data-type="internship" data-sector="ib">
+          <div class="alumni-card__top">
+            <div class="alumni-card__avatar" style="background:linear-gradient(135deg,#2a4a6e,var(--color-primary));">
+              EF
+            </div>
+            <div>
+              <div class="alumni-card__name">Alumni Name</div>
+              <div class="alumni-card__cohort">ECI 2024/25 · Energy / Utilities</div>
+            </div>
+          </div>
+          <p class="alumni-card__role"><strong>M&amp;A Summer Analyst</strong><br>Rothschild &amp; Co, London</p>
+          <div class="alumni-card__footer">
+            <span class="alumni-card__type alumni-card__type--internship">Internship</span>
+            <a href="#" class="alumni-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="alumni-card" data-type="fulltime" data-sector="am">
+          <div class="alumni-card__top">
+            <div class="alumni-card__avatar" style="background:linear-gradient(135deg,var(--color-accent),#2a6e4a);">
+              GH
+            </div>
+            <div>
+              <div class="alumni-card__name">Alumni Name</div>
+              <div class="alumni-card__cohort">ECI 2022/23 · Financials</div>
+            </div>
+          </div>
+          <p class="alumni-card__role"><strong>Equity Research Analyst</strong><br>Amundi Asset Management, Paris</p>
+          <div class="alumni-card__footer">
+            <span class="alumni-card__type alumni-card__type--fulltime">Full-time</span>
+            <a href="#" class="alumni-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="alumni-card" data-type="internship" data-sector="other">
+          <div class="alumni-card__top">
+            <div class="alumni-card__avatar" style="background:linear-gradient(135deg,#5e3a7e,#8a5ab8);">
+              IJ
+            </div>
+            <div>
+              <div class="alumni-card__name">Alumni Name</div>
+              <div class="alumni-card__cohort">ECI 2024/25 · Consumer</div>
+            </div>
+          </div>
+          <p class="alumni-card__role"><strong>Strategy &amp; Transactions Intern</strong><br>BCG, Paris</p>
+          <div class="alumni-card__footer">
+            <span class="alumni-card__type alumni-card__type--internship">Internship</span>
+            <a href="#" class="alumni-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="alumni-card" data-type="fulltime" data-sector="ib">
+          <div class="alumni-card__top">
+            <div class="alumni-card__avatar" style="background:linear-gradient(135deg,var(--color-primary),#1a3a5e);">
+              KL
+            </div>
+            <div>
+              <div class="alumni-card__name">Alumni Name</div>
+              <div class="alumni-card__cohort">ECI 2022/23 · Industrials</div>
+            </div>
+          </div>
+          <p class="alumni-card__role"><strong>Analyst, Equity Capital Markets</strong><br>BNP Paribas CIB, Paris</p>
+          <div class="alumni-card__footer">
+            <span class="alumni-card__type alumni-card__type--fulltime">Full-time</span>
+            <a href="#" class="alumni-card__linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="text-align:center;font-size:var(--text-sm);color:var(--color-text-muted);margin-top:var(--space-8);opacity:.7;">
+        Are you an ECI alumnus? <a href="mailto:esseccapitalinvestments@gmail.com" style="color:var(--color-primary);">Get in touch</a> to be featured.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background:var(--color-primary);color:var(--color-text-inverse);text-align:center;">
+    <div class="container" style="max-width:var(--content-default);">
+      <h2 style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);margin-bottom:var(--space-3);">Your career starts here.</h2>
+      <p style="opacity:0.8;margin-bottom:var(--space-6);max-width:48ch;margin-inline:auto;">Join ECI and build the skills, the network, and the track record that opens doors at the world's best financial institutions.</p>
+      <div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;">
+        <a href="../pages/join.html" class="btn btn--accent btn--lg">Apply to ECI</a>
+        <a href="../pages/team.html" class="btn btn--lg" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);">Meet the Team</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+<div id="footer-slot"></div>
+
+<script src="../components.js?v=3"></script>
+<script>
+(function() {
+  // Alumni filter
+  var btns = document.querySelectorAll('.alumni-filter__btn');
+  var cards = document.querySelectorAll('#alumniGrid .alumni-card');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.filter;
+      cards.forEach(function(card) {
+        var show = f === 'all'
+          || card.dataset.type === f
+          || card.dataset.sector === f;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

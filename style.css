@@ -209,7 +209,7 @@
    Render it large then flex-center to show only the content zone.
    Content sits at the centre ~30% of height × ~70% of width.
    Adjust --logo-content-h to resize (controls everything else). */
-:root { --logo-content-h: 28px; }
+:root { --logo-content-h: 56px; }
 
 .eci-logo-full-wrap {
   display: inline-flex;

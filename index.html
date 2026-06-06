@@ -116,6 +116,12 @@
   width: 100%;
 }
 @media (min-width: 768px) { .hero-cinema__content { padding: 0 var(--space-12) var(--space-20); } }
+/* ── Hero text CSS animations (no JS dependency) ── */
+@keyframes hReveal {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: none; }
+}
+
 .hero-eyebrow {
   font-family: var(--jb);
   font-size: 11px;
@@ -125,7 +131,7 @@
   color: var(--eci-gold);
   margin-bottom: var(--space-5);
   display: flex; align-items: center; gap: var(--space-3);
-  opacity: 0;
+  animation: hReveal 0.85s 0.30s cubic-bezier(0.16,1,0.3,1) both;
 }
 .hero-eyebrow::before {
   content: '';
@@ -141,7 +147,7 @@
   color: rgba(255,255,255,0.95);
   letter-spacing: -0.02em;
   margin-bottom: 0;
-  opacity: 0;
+  animation: hReveal 0.95s 0.44s cubic-bezier(0.16,1,0.3,1) both;
 }
 .hero-title-serif {
   font-family: var(--pf);
@@ -153,7 +159,7 @@
   letter-spacing: -0.02em;
   display: block;
   margin-bottom: var(--space-6);
-  opacity: 0;
+  animation: hReveal 1.05s 0.56s cubic-bezier(0.16,1,0.3,1) both;
 }
 .hero-subtitle {
   font-size: clamp(var(--text-sm), 1.8vw, var(--text-base));
@@ -161,11 +167,11 @@
   max-width: 48ch;
   line-height: 1.65;
   margin-bottom: var(--space-8);
-  opacity: 0;
+  animation: hReveal 0.90s 0.72s cubic-bezier(0.16,1,0.3,1) both;
 }
 .hero-actions {
   display: flex; gap: var(--space-3); flex-wrap: wrap;
-  opacity: 0;
+  animation: hReveal 0.85s 0.86s cubic-bezier(0.16,1,0.3,1) both;
 }
 .btn-magnetic {
   position: relative; overflow: hidden;
@@ -203,7 +209,7 @@
   position: absolute; bottom: var(--space-8); right: var(--space-8);
   z-index: 3;
   display: flex; flex-direction: column; align-items: center; gap: 6px;
-  opacity: 0;
+  animation: hReveal 1s 1.2s cubic-bezier(0.16,1,0.3,1) both;
 }
 .hero-scroll__line {
   width: 1px; height: 48px;
@@ -218,6 +224,36 @@
   color: rgba(201,168,76,0.7);
   writing-mode: vertical-rl;
 }
+
+/* ── Quick Nav Strip ── */
+.quick-nav {
+  background: var(--eci-dark);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: var(--space-4) 0;
+}
+.quick-nav__inner {
+  max-width: 1160px; margin-inline: auto;
+  padding-inline: var(--space-6);
+  display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap;
+  justify-content: center;
+}
+.quick-nav__link {
+  font-family: var(--jb);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .10em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  transition: color .2s, border-color .2s, background .2s;
+}
+.quick-nav__link:hover {
+  color: var(--eci-gold);
+  border-color: rgba(201,168,76,0.35);
+  background: rgba(201,168,76,0.06);
+}
+.quick-nav__sep { color: rgba(255,255,255,0.12); font-size: 12px; }
 
 /* ── Stats Cinema ── */
 .stats-cinema-section {
@@ -761,6 +797,21 @@
     </div>
   </section>
 
+  <!-- ── Quick Navigation Strip ── -->
+  <nav class="quick-nav" aria-label="Page navigation">
+    <div class="quick-nav__inner">
+      <a href="./pages/about.html"   class="quick-nav__link">About</a>
+      <a href="./pages/team.html"    class="quick-nav__link">The Team</a>
+      <a href="./pages/pitches.html" class="quick-nav__link">Pitches</a>
+      <a href="./pages/fund.html"    class="quick-nav__link">The Fund</a>
+      <a href="./pages/join.html"    class="quick-nav__link">Join ECI</a>
+      <a href="./pages/partners.html"class="quick-nav__link">Partners</a>
+      <a href="./pages/alumni.html"  class="quick-nav__link">Alumni</a>
+      <a href="./pages/events.html"  class="quick-nav__link">Events</a>
+      <a href="./pages/contact.html" class="quick-nav__link">Contact</a>
+    </div>
+  </nav>
+
   <!-- ═══════════════════════════════════════
        STATS BAR
        ═══════════════════════════════════════ -->
@@ -883,7 +934,7 @@
       <div class="fade-in">
         <span class="imm__label">Who We Are</span>
         <h2 class="imm__title">Rigorous research.<br>Real investments.<br>No shortcuts.</h2>
-        <p class="imm__desc">ECI is not a finance club. Every member produces original equity research, defends their thesis under scrutiny from the full team, and contributes to a real portfolio. The standards are high because the goal is real.</p>
+        <p class="imm__desc">Every member produces original equity research, defends their thesis under scrutiny, and contributes to a real portfolio. No shortcuts.</p>
         <a href="./pages/about.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Our Mission →</a>
       </div>
       <div class="imm-stat-grid fade-in">
@@ -913,7 +964,7 @@
       <div class="fade-in">
         <span class="imm__label" style="color:var(--eci-gold);">The People</span>
         <h2 class="imm__title" style="color:var(--color-text);">28 analysts.<br>5 sector teams.<br>One investment committee.</h2>
-        <p class="imm__desc" style="color:var(--color-text-muted);">From TMT and Financials to Energy, Defensive, and Opportunities — every sector is covered by a dedicated team with a head responsible for research quality and investment decisions.</p>
+        <p class="imm__desc" style="color:var(--color-text-muted);">TMT/FIG, Energy & Utilities, Defensive, Opportunities — 5 sector teams, each led by a senior member responsible for research quality.</p>
         <a href="./pages/team.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Meet the Team →</a>
       </div>
       <div class="team-photo-grid fade-in">
@@ -933,7 +984,7 @@
       <div class="fade-in">
         <span class="imm__label">Equity Research</span>
         <h2 class="imm__title">Original research.<br>Real recommendations.</h2>
-        <p class="imm__desc">Every pitch starts with weeks of fundamental analysis — financial modelling, competitive positioning, valuation. Then it gets stress-tested in front of the full team before a buy, sell, or hold is issued.</p>
+        <p class="imm__desc">Weeks of fundamental analysis. DCF valuations. Stress-tested in front of the full team. Then a vote — Buy, Sell, or Hold.</p>
         <a href="./pages/pitches.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">View All Pitches →</a>
       </div>
       <div class="pitch-stack fade-in">
@@ -952,7 +1003,7 @@
       <div class="fade-in">
         <span class="imm__label" style="color:var(--eci-navy);">The ECI Fund</span>
         <h2 class="imm__title" style="color:var(--eci-navy);">A real portfolio.<br>Managed by students.</h2>
-        <p class="imm__desc" style="color:var(--eci-navy);opacity:0.70;">Every position in the ECI Fund originated from a formal pitch voted on by the team. No simulation — real capital, real decisions, real accountability.</p>
+        <p class="imm__desc" style="color:var(--eci-navy);opacity:0.70;">Every position voted on by the team after a formal pitch. Real capital, real decisions, real accountability.</p>
         <a href="./pages/fund.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Track the Fund →</a>
       </div>
       <div class="fade-in">
@@ -997,7 +1048,7 @@
       <div class="fade-in">
         <span class="imm__label">Recruitment</span>
         <h2 class="imm__title">Ready to build your finance career from day one?</h2>
-        <p class="imm__desc">Applications open every September. No prior experience required — just genuine interest in markets, a strong work ethic, and the drive to produce research that stands up to scrutiny.</p>
+        <p class="imm__desc">Applications open every September. No prior experience needed — just genuine interest in markets and the drive to produce serious research.</p>
         <div style="display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-6);">
           <a href="./pages/join.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Apply to Join</a>
           <a href="./pages/join.html" class="btn-magnetic btn-magnetic--outline" style="display:inline-flex;">Learn More</a>
@@ -1017,7 +1068,7 @@
       <div class="fade-in">
         <span class="imm__label" style="color:var(--eci-gold);">Official Partner</span>
         <h2 class="imm__title" style="color:var(--color-text);">Training with the best in French finance.</h2>
-        <p class="imm__desc" style="color:var(--color-text-muted);">ECI members get exclusive access to AlumnEye's Analyst Training Program — the same program used to prepare candidates for Goldman Sachs, JPMorgan, and KKR recruitment in France.</p>
+        <p class="imm__desc" style="color:var(--color-text-muted);">Exclusive access to AlumnEye's ATP — the benchmark program for IB, PE, and AM recruitment preparation in France.</p>
         <a href="./pages/partners.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Partnership Details →</a>
       </div>
       <div class="benefit-grid fade-in">
@@ -1064,7 +1115,7 @@
 <!-- ── GSAP ── -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script src="./components.js?v=5"></script>
+<script src="./components.js?v=6"></script>
 
 <script>
 /* ═══════════════════════════════════════
@@ -1073,29 +1124,14 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ── Hero entrance ── */
 document.addEventListener('DOMContentLoaded', function() {
   // Slow parallax on hero bg
   var bg = document.getElementById('hero-bg');
   if (bg) {
-    setTimeout(function() { bg.style.transform = 'scale(1)'; }, 100);
     window.addEventListener('scroll', function() {
-      var y = window.scrollY;
-      bg.style.transform = 'scale(1.04) translateY(' + (y * 0.25) + 'px)';
+      bg.style.transform = 'scale(1.04) translateY(' + (window.scrollY * 0.22) + 'px)';
     }, { passive: true });
   }
-
-  // Hero stagger
-  var tl = gsap.timeline({ delay: 0.3 });
-  tl.to('#h-eyebrow', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0)
-    .to('#h-sans',    { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' }, 0.15)
-    .to('#h-serif',   { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, 0.28)
-    .to('#h-sub',     { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0.44)
-    .to('#h-actions', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.56)
-    .to('#h-scroll',  { opacity: 1,       duration: 1.0, ease: 'power2.out' }, 0.80);
-
-  // Set initial states
-  gsap.set(['#h-eyebrow','#h-sans','#h-serif','#h-sub','#h-actions'], { y: 45 });
 
   /* ── Pill nav: morph on scroll ── */
   var header = document.getElementById('site-header');

@@ -209,20 +209,19 @@
    Show the center ~47% of the image height so content is
    always fully visible regardless of exact canvas margins.
    Change --logo-img-w to resize everything. */
-:root { --logo-img-w: 110px; }
-
+/* Logo: render image at 160px wide → content zone (30%×70%) = 48px tall × 112px wide.
+   Container clips to 48px height, centered. No content ever cut. */
 .eci-logo-full-wrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  /* clip to center strip — generous enough to never cut content */
-  height: 52px;
+  height: 48px;
   overflow: hidden;
 }
 .eci-logo-full {
-  width: var(--logo-img-w);
-  height: auto;     /* stays square (2000×2000) → same as width */
+  width: 160px;
+  height: auto;   /* = 160px square → shows center 48px = 30% = content zone */
   flex-shrink: 0;
 }
 

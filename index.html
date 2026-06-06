@@ -4,426 +4,1256 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ECI — ESSEC Capital Investments</title>
-<meta name="description" content="ECI — ESSEC Capital Investments is a student-led investment association at ESSEC Business School dedicated to equity research, stock pitches, portfolio management, and financial education.">
+<meta name="description" content="ESSEC Capital Investments — the student-led investment association at ESSEC Business School dedicated to equity research, portfolio management, and financial education.">
 <meta property="og:title" content="ECI — ESSEC Capital Investments">
 <meta property="og:description" content="Student-led investment association at ESSEC Business School dedicated to equity research and financial education.">
 
+<!-- Fonts -->
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700;1,900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css">
 
 <style>
-/* ── Hero animation ── */
-@keyframes heroGlow {
-  0%,100% { opacity:.18; transform:translateY(0); }
-  50%      { opacity:.28; transform:translateY(-8px); }
-}
-@keyframes chartDraw {
-  from { stroke-dashoffset: 1800; }
-  to   { stroke-dashoffset: 0; }
-}
-@keyframes chartFade {
-  0%,30%   { opacity:0; }
-  60%,100% { opacity:1; }
-}
-.hero-chart      { animation: chartFade 1.8s ease forwards; }
-.hero-chart .line {
-  stroke-dasharray: 1800;
-  stroke-dashoffset: 1800;
-  animation: chartDraw 2.4s cubic-bezier(.4,0,.2,1) .3s forwards;
-}
-.hero-glow { animation: heroGlow 6s ease-in-out infinite; }
+/* ══════════════════════════════════════════════
+   CINEMATIC HOMEPAGE — ECI Digital Instrument
+   ══════════════════════════════════════════════ */
 
-/* ── Hub nav cards ── */
-.hub-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
+/* ── Token overrides for gold accent ── */
+:root {
+  --eci-gold: #c9a84c;
+  --eci-gold-light: rgba(201,168,76,0.12);
+  --eci-navy: #113d63;
+  --eci-dark: #0e1a28;
+  --eci-cream: #f4f6f9;
+  --jb: 'JetBrains Mono', monospace;
+  --pf: 'Playfair Display', Georgia, serif;
 }
-@media (max-width: 900px) {
-  .hub-grid { grid-template-columns: repeat(2, 1fr); }
+
+/* ── Noise overlay ── */
+.noise-overlay {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 9998;
+  width: 100%; height: 100%; opacity: 0.045;
 }
-@media (max-width: 560px) {
-  .hub-grid { grid-template-columns: 1fr; }
+
+/* ── Pill nav ── */
+#site-header {
+  position: fixed !important;
+  top: 14px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: calc(100% - 32px) !important;
+  max-width: 1160px !important;
+  border-radius: 999px !important;
+  background: rgba(17,61,99,0.18) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.14) !important;
+  box-shadow: 0 4px 40px rgba(14,26,40,0.25) !important;
+  transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94) !important;
 }
-.hub-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-6);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color .18s, box-shadow .18s, transform .18s;
+#site-header.site-header--scrolled {
+  background: rgba(244,246,249,0.90) !important;
+  backdrop-filter: blur(28px) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  border-color: rgba(17,61,99,0.14) !important;
+  box-shadow: 0 2px 24px rgba(14,26,40,0.10) !important;
+}
+/* Nav links white over hero */
+#site-header:not(.site-header--scrolled) .nav-desktop a,
+#site-header:not(.site-header--scrolled) .nav-desktop a.active {
+  color: rgba(255,255,255,0.88) !important;
+}
+#site-header:not(.site-header--scrolled) .nav-desktop a:hover {
+  color: var(--eci-gold) !important;
+  background: transparent !important;
+}
+#site-header:not(.site-header--scrolled) .theme-toggle {
+  color: rgba(255,255,255,0.75) !important;
+}
+#site-header:not(.site-header--scrolled) .mobile-menu-btn {
+  color: rgba(255,255,255,0.88) !important;
+}
+#site-header:not(.site-header--scrolled) .eci-logo-full {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* ── Hero Cinema ── */
+.hero-cinema {
   position: relative;
+  height: 100dvh;
+  min-height: 640px;
+  display: flex;
+  align-items: flex-end;
   overflow: hidden;
 }
-.hub-card:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 8px 32px oklch(from var(--color-accent) l c h / 0.12);
-  transform: translateY(-2px);
+.hero-cinema__bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80');
+  background-size: cover;
+  background-position: center 30%;
+  transform: scale(1.04);
+  transition: transform 8s ease;
 }
-.hub-card__icon {
-  width: 48px; height: 48px;
-  border-radius: var(--radius-md);
-  background: oklch(from var(--color-accent) l c h / 0.10);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+.hero-cinema__bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(14,26,40,0.96) 0%,
+    rgba(14,26,40,0.72) 40%,
+    rgba(17,61,99,0.30) 80%,
+    rgba(17,61,99,0.10) 100%
+  );
 }
-.hub-card__label {
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: .08em;
+.hero-cinema__content {
+  position: relative; z-index: 2;
+  max-width: 1160px;
+  margin-inline: auto;
+  padding: 0 var(--space-6) var(--space-16);
+  width: 100%;
+}
+@media (min-width: 768px) { .hero-cinema__content { padding: 0 var(--space-12) var(--space-20); } }
+.hero-eyebrow {
+  font-family: var(--jb);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--eci-gold);
+  margin-bottom: var(--space-5);
+  display: flex; align-items: center; gap: var(--space-3);
+  opacity: 0;
 }
-.hub-card__title {
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px; height: 1px;
+  background: var(--eci-gold);
+}
+.hero-title-sans {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6vw, 5.5rem);
+  line-height: 1.0;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: -0.02em;
+  margin-bottom: 0;
+  opacity: 0;
+}
+.hero-title-serif {
+  font-family: var(--pf);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(3.2rem, 8vw, 7.5rem);
+  line-height: 0.95;
+  color: var(--eci-gold);
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: var(--space-6);
+  opacity: 0;
+}
+.hero-subtitle {
+  font-size: clamp(var(--text-sm), 1.8vw, var(--text-base));
+  color: rgba(255,255,255,0.58);
+  max-width: 48ch;
+  line-height: 1.65;
+  margin-bottom: var(--space-8);
+  opacity: 0;
+}
+.hero-actions {
+  display: flex; gap: var(--space-3); flex-wrap: wrap;
+  opacity: 0;
+}
+.btn-magnetic {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer; border: none;
+  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+              box-shadow 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.btn-magnetic:hover { transform: scale(1.04); }
+.btn-magnetic--gold {
+  background: var(--eci-gold);
+  color: var(--eci-dark);
+  box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+}
+.btn-magnetic--gold:hover { box-shadow: 0 8px 40px rgba(201,168,76,0.50); }
+.btn-magnetic--outline {
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-magnetic--outline:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-color: rgba(255,255,255,0.45);
+}
+/* hero scroll indicator */
+.hero-scroll {
+  position: absolute; bottom: var(--space-8); right: var(--space-8);
+  z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0;
+}
+.hero-scroll__line {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, rgba(201,168,76,0.8), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+.hero-scroll__label {
+  font-family: var(--jb);
+  font-size: 9px; letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.7);
+  writing-mode: vertical-rl;
+}
+
+/* ── Stats Cinema ── */
+.stats-cinema-section {
+  padding: var(--space-10) 0;
+  background: var(--eci-dark);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.stats-cinema-inner {
+  max-width: 1160px; margin-inline: auto;
+  padding-inline: var(--space-6);
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: var(--space-1);
+}
+@media (max-width: 700px) { .stats-cinema-inner { grid-template-columns: repeat(2,1fr); } }
+.stat-cinema {
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.stat-cinema:last-child { border-right: none; }
+.stat-cinema__val {
+  font-family: var(--pf);
+  font-style: italic;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--eci-gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-cinema__lbl {
+  font-family: var(--jb);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+}
+
+/* ── Feature Cards ── */
+.features-cinema {
+  padding: var(--space-20) 0;
+  background: var(--eci-cream);
+}
+.features-cinema__inner {
+  max-width: 1160px; margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+@media (min-width: 768px) { .features-cinema__inner { padding-inline: var(--space-12); } }
+.features-header { margin-bottom: var(--space-12); }
+.features-header__label {
+  font-family: var(--jb);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--eci-navy); opacity: 0.5;
+  margin-bottom: var(--space-2);
+}
+.features-header__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: var(--eci-dark);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: var(--space-5);
+}
+@media (max-width: 900px) { .features-grid { grid-template-columns: 1fr; } }
+
+.feature-card {
+  background: #fff;
+  border: 1px solid rgba(17,61,99,0.10);
+  border-radius: 2rem;
+  padding: var(--space-8);
+  position: relative; overflow: hidden;
+  box-shadow: 0 2px 24px rgba(14,26,40,0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.feature-card:hover {
+  box-shadow: 0 12px 48px rgba(14,26,40,0.10);
+  transform: translateY(-3px);
+}
+.fc-label {
+  font-family: var(--jb);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--eci-gold);
+  margin-bottom: var(--space-3);
+}
+.fc-title {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--text-lg);
-  color: var(--color-text);
-  margin: 0;
+  color: var(--eci-dark);
+  margin-bottom: var(--space-2);
   line-height: 1.2;
 }
-.hub-card__desc {
+.fc-desc {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   line-height: 1.6;
-  flex: 1;
+  margin-bottom: var(--space-6);
 }
-.hub-card__arrow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-accent);
-  margin-top: auto;
-  transition: gap .18s;
-}
-.hub-card:hover .hub-card__arrow { gap: var(--space-2); }
 
-/* ── Partner strip ── */
-.partner-strip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-8);
-  flex-wrap: wrap;
-  padding: var(--space-8) 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+/* Card 1 — Shuffler */
+.shuffler-wrap {
+  position: relative;
+  height: 88px;
+  overflow: hidden;
 }
-.partner-strip__label {
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+.shuffler-item {
+  position: absolute; width: 100%;
+  background: linear-gradient(135deg, rgba(17,61,99,0.06), rgba(201,168,76,0.06));
+  border: 1px solid rgba(17,61,99,0.10);
+  border-radius: 1rem;
+  padding: var(--space-3) var(--space-4);
+  display: flex; flex-direction: column;
+  transition: transform 0.65s cubic-bezier(0.34,1.56,0.64,1), opacity 0.45s ease;
+}
+.shuffler-item__name {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: var(--text-base);
+  color: var(--eci-navy);
+}
+.shuffler-item__sub {
+  font-family: var(--jb);
+  font-size: 10px; color: var(--color-text-muted);
+  letter-spacing: .04em; margin-top: 2px;
+}
+
+/* Card 2 — Typewriter */
+.live-feed {
+  background: var(--eci-dark);
+  border-radius: 1rem;
+  padding: var(--space-4);
+  min-height: 96px;
+  font-family: var(--jb);
+}
+.live-feed__header {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: var(--space-3);
+}
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #22c55e;
+  animation: livePulse 1.4s ease-in-out infinite;
+}
+@keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(0.85)} }
+.live-feed__tag {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: #22c55e;
+}
+.typewriter-output {
+  font-size: 11px; line-height: 1.7;
+  color: rgba(180,220,180,0.85);
+  min-height: 48px;
+  word-break: break-all;
+}
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px; height: 14px;
+  background: var(--eci-gold);
+  margin-left: 2px;
+  animation: cursorBlink 0.9s step-end infinite;
+  vertical-align: middle;
+}
+@keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* Card 3 — Scheduler */
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 4px;
+  position: relative;
+}
+.day-header {
+  font-family: var(--jb);
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
   color: var(--color-text-muted);
-  opacity: .7;
+  text-align: center;
+  padding-bottom: 4px;
 }
-.partner-logo {
+.day-cell {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  border: 1px solid rgba(17,61,99,0.10);
+  background: rgba(17,61,99,0.03);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--jb);
+  font-size: 11px; font-weight: 500;
+  color: var(--color-text-muted);
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  cursor: default;
+}
+.day-cell.active {
+  background: var(--eci-gold);
+  border-color: var(--eci-gold);
+  color: var(--eci-dark);
+  font-weight: 700;
+}
+.sched-cursor {
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--eci-navy);
+  pointer-events: none;
+  transition: left 0.55s cubic-bezier(0.34,1.56,0.64,1), top 0.55s cubic-bezier(0.34,1.56,0.64,1);
+  top: 0; left: 0;
+  box-shadow: 0 0 0 2px rgba(17,61,99,0.2);
+  z-index: 10;
+}
+.sched-label {
+  font-family: var(--jb);
+  font-size: 9px; letter-spacing: .08em;
+  color: var(--color-text-muted);
+  margin-top: var(--space-3);
+  text-align: center;
+}
+
+/* ── Philosophy Manifesto ── */
+.philosophy-cinema {
+  position: relative;
+  padding: var(--space-24) 0;
+  background: var(--eci-dark);
+  overflow: hidden;
+}
+.philosophy-cinema__bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1557264305-7e2764da873b?w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.06;
+}
+.philosophy-cinema__inner {
+  position: relative; z-index: 2;
+  max-width: 1100px; margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+@media (min-width: 768px) { .philosophy-cinema__inner { padding-inline: var(--space-12); } }
+.philosophy-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(50px);
+}
+.philosophy-line--small {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-base), 2vw, var(--text-xl));
+  color: rgba(255,255,255,0.38);
+  margin-bottom: var(--space-4);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.philosophy-line--large {
+  font-family: var(--pf);
+  font-style: italic;
+  font-size: clamp(2.2rem, 5.5vw, 5rem);
+  color: rgba(255,255,255,0.90);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.philosophy-line--large em {
+  color: var(--eci-gold);
+  font-style: italic;
+}
+
+/* ── Immersive sections (carry over + enhancements) ── */
+.imm {
+  min-height: 88vh;
+  display: flex; align-items: center;
+  padding: var(--space-16) 0;
+}
+.imm__inner {
+  max-width: 1160px; margin-inline: auto;
+  padding-inline: var(--space-6);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+  width: 100%;
+}
+@media (min-width: 768px) { .imm__inner { padding-inline: var(--space-12); } }
+@media (max-width: 768px) {
+  .imm__inner { grid-template-columns: 1fr; gap: var(--space-10); }
+  .imm { min-height: auto; padding: var(--space-16) 0; }
+}
+.imm--flip .imm__inner > :first-child { order: 2; }
+.imm--flip .imm__inner > :last-child  { order: 1; }
+@media (max-width: 768px) { .imm--flip .imm__inner > * { order: unset; } }
+.imm__title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: var(--text-lg);
-  color: var(--color-text);
-  opacity: .5;
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  line-height: 1.08;
+  margin-bottom: var(--space-4);
   letter-spacing: -0.02em;
-  text-decoration: none;
-  transition: opacity .18s;
 }
-.partner-logo:hover { opacity: .85; }
+.imm__desc {
+  font-size: var(--text-base);
+  line-height: 1.75;
+  opacity: 0.78;
+  max-width: 42ch;
+  margin-bottom: var(--space-6);
+}
+.imm__label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: var(--space-3);
+  display: block;
+}
+.imm-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.imm-stat-box { padding: var(--space-6); border-radius: var(--radius-lg); text-align: center; }
+.imm-stat-num {
+  font-family: var(--pf);
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1;
+  margin-bottom: var(--space-1);
+}
+.imm-stat-lbl {
+  font-family: var(--jb);
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .10em; opacity: 0.65;
+}
+.pitch-stack { display: flex; flex-direction: column; gap: var(--space-3); }
+.pitch-mini {
+  display: flex; align-items: center; gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  transition: background .2s, transform .2s;
+  text-decoration: none;
+}
+.pitch-mini:hover { background: rgba(255,255,255,0.11); transform: translateX(4px); }
+.pitch-mini__logo {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 11px;
+  color: #fff; flex-shrink: 0; letter-spacing: .04em;
+}
+.pitch-mini__info { flex: 1; }
+.pitch-mini__company { font-weight: 700; font-size: var(--text-sm); color: #fff; }
+.pitch-mini__sector { font-size: var(--text-xs); opacity: .55; color: #fff; margin-top: 1px; }
+.team-photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-3); }
+.team-photo-cell {
+  aspect-ratio: 1; border-radius: var(--radius-lg); overflow: hidden;
+  background: var(--color-surface-2); position: relative;
+}
+.team-photo-cell img { width: 100%; height: 100%; object-fit: cover; }
+.team-photo-cell__name {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: var(--space-2) var(--space-3);
+  background: linear-gradient(transparent, rgba(0,0,0,.65));
+  color: #fff; font-size: 10px; font-weight: 700; text-align: center;
+}
+.fund-kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-6); }
+.fund-kpi { padding: var(--space-4); border-radius: var(--radius-md); background: rgba(0,0,0,0.15); }
+.fund-kpi__val { font-family: var(--font-display); font-weight: 800; font-size: var(--text-2xl); line-height: 1; margin-bottom: 2px; }
+.fund-kpi__lbl { font-family: var(--jb); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; opacity: .65; }
+.recruit-steps { display: flex; flex-direction: column; gap: var(--space-5); }
+.recruit-step { display: flex; gap: var(--space-4); align-items: flex-start; }
+.recruit-step__num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--eci-gold); color: var(--eci-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--pf); font-style: italic; font-weight: 700; font-size: var(--text-base);
+  flex-shrink: 0;
+}
+.recruit-step__title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-base); margin-bottom: 2px; }
+.recruit-step__desc { font-size: var(--text-sm); opacity: .72; line-height: 1.5; }
+.benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.benefit-box { padding: var(--space-5); border-radius: var(--radius-lg); border: 1px solid var(--color-border); background: var(--color-surface); transition: transform .2s, box-shadow .2s; }
+.benefit-box:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,26,40,0.08); }
+.benefit-box__icon { width: 36px; height: 36px; border-radius: var(--radius-md); background: oklch(from var(--color-primary) l c h / 0.08); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-2); }
+.benefit-box__title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-sm); margin-bottom: 4px; }
+.benefit-box__desc { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5; }
+
+/* ── LinkedIn CTA ── */
+.linkedin-cta {
+  padding: var(--space-24) 0;
+  background: var(--eci-dark);
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.linkedin-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(201,168,76,0.10) 0%, transparent 70%);
+}
+.linkedin-cta__inner { position: relative; z-index: 2; max-width: 680px; margin-inline: auto; padding-inline: var(--space-6); }
+.linkedin-cta__eyebrow {
+  font-family: var(--jb);
+  font-size: 10px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--eci-gold);
+  margin-bottom: var(--space-5);
+  display: flex; align-items: center; justify-content: center; gap: var(--space-3);
+}
+.linkedin-cta__eyebrow::before,
+.linkedin-cta__eyebrow::after {
+  content: ''; flex: 1; max-width: 60px;
+  height: 1px; background: rgba(201,168,76,0.4);
+}
+.linkedin-cta__title {
+  font-family: var(--pf);
+  font-style: italic;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-5);
+}
+.linkedin-cta__sub {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.45);
+  line-height: 1.65;
+  margin-bottom: var(--space-8);
+}
+.btn-linkedin {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 16px 36px;
+  border-radius: 999px;
+  background: var(--eci-gold);
+  color: var(--eci-dark);
+  font-family: var(--font-display);
+  font-weight: 700; font-size: var(--text-base);
+  text-decoration: none;
+  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+              box-shadow 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+  box-shadow: 0 4px 32px rgba(201,168,76,0.30);
+}
+.btn-linkedin:hover {
+  transform: scale(1.04) translateY(-2px);
+  box-shadow: 0 12px 48px rgba(201,168,76,0.48);
+}
+
+/* ── System Operational Footer Bar ── */
+.sys-status-bar {
+  background: rgba(14,26,40,0.95);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: var(--space-3) 0;
+}
+.sys-status-bar__inner {
+  max-width: 1160px; margin-inline: auto;
+  padding-inline: var(--space-6);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: var(--space-3);
+}
+.sys-status {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--jb);
+  font-size: 11px; color: rgba(255,255,255,0.35);
+  letter-spacing: .08em;
+}
+.sys-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #22c55e;
+  animation: sysPulse 2.4s ease-in-out infinite;
+}
+@keyframes sysPulse { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.5)} 60%{box-shadow:0 0 0 6px rgba(34,197,94,0)} }
+.sys-version {
+  font-family: var(--jb);
+  font-size: 10px; color: rgba(255,255,255,0.20);
+  letter-spacing: .06em;
+}
+
+/* ── Partner strip (in immersive) ── */
+.partner-strip-mini {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; gap: var(--space-3);
+}
+.partner-strip-mini__label {
+  font-family: var(--jb); font-size: 9px;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.partner-strip-mini__name {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: var(--text-base); color: rgba(255,255,255,0.65);
+  letter-spacing: -0.02em;
+}
+
+/* ── Responsive hero ── */
+@media (max-width: 600px) {
+  .hero-scroll { display: none; }
+  .stats-cinema-inner { grid-template-columns: repeat(2,1fr); }
+  .stat-cinema { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+}
 </style>
 </head>
 <body>
+
+<!-- ── Noise Texture Overlay ── -->
+<svg class="noise-overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="cinematic-noise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#cinematic-noise)"/>
+</svg>
 
 <div id="header-slot"></div>
 
 <main id="main">
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero">
-    <div class="hero__bg">
-      <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-          <pattern id="grid-hero" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" stroke-width="0.4"/>
-          </pattern>
-          <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#94b8d8" stop-opacity="0.25"/>
-            <stop offset="100%" stop-color="#94b8d8" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid-hero)" opacity="0.6"/>
-        <circle class="hero-glow" cx="900" cy="180" r="320" fill="#94b8d8" opacity="0.06"/>
-        <circle class="hero-glow" cx="200" cy="500" r="260" fill="#5e7c9e" opacity="0.05" style="animation-delay:.8s"/>
-        <g class="hero-chart" transform="translate(0,40)">
-          <path fill="url(#chartGrad)"
-            d="M0 520 L80 490 L160 470 L220 455 L280 440 L340 430 L390 410 L430 395 L480 380 L530 365 L580 345 L620 320 L660 295 L700 275 L740 255 L780 235 L820 215 L860 200 L900 185 L940 175 L980 160 L1020 145 L1060 130 L1100 115 L1160 95 L1200 80 L1200 600 L0 600 Z"
-            opacity="0.5"/>
-          <path class="line" fill="none" stroke="#94b8d8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
-            d="M0 520 L80 490 L160 470 L220 455 L280 440 L340 430 L390 410 L430 395 L480 380 L530 365 L580 345 L620 320 L660 295 L700 275 L740 255 L780 235 L820 215 L860 200 L900 185 L940 175 L980 160 L1020 145 L1060 130 L1100 115 L1160 95 L1200 80"/>
-          <g fill="none" stroke="#94b8d8" stroke-width="1.2" opacity="0.5">
-            <line x1="160" y1="462" x2="160" y2="478"/><line x1="156" y1="465" x2="164" y2="465"/><line x1="156" y1="475" x2="164" y2="475"/>
-            <line x1="390" y1="402" x2="390" y2="418"/><line x1="386" y1="405" x2="394" y2="405"/><line x1="386" y1="415" x2="394" y2="415"/>
-            <line x1="620" y1="312" x2="620" y2="328"/><line x1="616" y1="315" x2="624" y2="315"/><line x1="616" y1="325" x2="624" y2="325"/>
-            <line x1="860" y1="192" x2="860" y2="208"/><line x1="856" y1="195" x2="864" y2="195"/><line x1="856" y1="205" x2="864" y2="205"/>
-            <line x1="1100" y1="107" x2="1100" y2="123"/><line x1="1096" y1="110" x2="1104" y2="110"/><line x1="1096" y1="120" x2="1104" y2="120"/>
-          </g>
-        </g>
-      </svg>
+  <!-- ═══════════════════════════════════════
+       HERO — The Opening Shot
+       ═══════════════════════════════════════ -->
+  <section class="hero-cinema" id="hero-cinema">
+    <div class="hero-cinema__bg" id="hero-bg"></div>
+    <div class="hero-cinema__content">
+      <p class="hero-eyebrow" id="h-eyebrow">ESSEC Business School · Paris · Est. 2023</p>
+      <h1>
+        <span class="hero-title-sans" id="h-sans">Where Research</span>
+        <span class="hero-title-serif" id="h-serif">Meets Reality.</span>
+      </h1>
+      <p class="hero-subtitle" id="h-sub">ESSEC Capital Investments trains the next generation of investment professionals — through original equity research, a real student-managed portfolio, and AlumnEye-backed career preparation.</p>
+      <div class="hero-actions" id="h-actions">
+        <a href="./pages/join.html" class="btn-magnetic btn-magnetic--gold">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          Apply to Join
+        </a>
+        <a href="./pages/pitches.html" class="btn-magnetic btn-magnetic--outline">View Our Research</a>
+      </div>
     </div>
-    <div class="hero__content">
-      <p class="section-label" style="color:var(--color-accent);">ESSEC Business School · Student Investment Association</p>
-      <h1 class="hero__title">ESSEC Capital<br>Investments</h1>
-      <p class="hero__subtitle">ECI trains the next generation of investment professionals through hands-on equity research, rigorous stock pitches, and real portfolio management at ESSEC Business School.</p>
-      <div class="hero__actions">
-        <a href="./pages/join.html" class="btn btn--primary btn--lg">Join ECI</a>
-        <a href="./pages/pitches.html" class="btn btn--secondary btn--lg">Our Pitches</a>
+    <div class="hero-scroll" id="h-scroll">
+      <div class="hero-scroll__line"></div>
+      <span class="hero-scroll__label">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       STATS BAR
+       ═══════════════════════════════════════ -->
+  <section class="stats-cinema-section">
+    <div class="stats-cinema-inner">
+      <div class="stat-cinema">
+        <div class="stat-cinema__val">28</div>
+        <div class="stat-cinema__lbl">Active Members</div>
+      </div>
+      <div class="stat-cinema">
+        <div class="stat-cinema__val">20+</div>
+        <div class="stat-cinema__lbl">Pitches Published</div>
+      </div>
+      <div class="stat-cinema">
+        <div class="stat-cinema__val">+8%</div>
+        <div class="stat-cinema__lbl">Fund Return</div>
+      </div>
+      <div class="stat-cinema">
+        <div class="stat-cinema__val">5</div>
+        <div class="stat-cinema__lbl">Sector Teams</div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ STATS BAR ═══ -->
-  <section style="padding-block:var(--space-10);background:var(--color-surface-2);border-bottom:1px solid var(--color-border);">
-    <div class="container">
-      <div class="grid-4">
-        <div class="stat fade-in">
-          <div class="stat__value">28</div>
-          <div class="stat__label">Active Members</div>
-        </div>
-        <div class="stat fade-in">
-          <div class="stat__value">20+</div>
-          <div class="stat__label">Pitches Delivered</div>
-        </div>
-        <div class="stat fade-in">
-          <div class="stat__value">5</div>
-          <div class="stat__label">Sector Teams</div>
-        </div>
-        <div class="stat fade-in">
-          <div class="stat__value">1</div>
-          <div class="stat__label">Official Partner</div>
-        </div>
+  <!-- ═══════════════════════════════════════
+       FEATURE CARDS — Interactive Artifacts
+       ═══════════════════════════════════════ -->
+  <section class="features-cinema">
+    <div class="features-cinema__inner">
+      <div class="features-header">
+        <div class="features-header__label">What We Do</div>
+        <h2 class="features-header__title">Three pillars.<br>One objective: Career readiness.</h2>
       </div>
-    </div>
-  </section>
+      <div class="features-grid">
 
-  <!-- ═══ EXPLORE HUB ═══ -->
-  <section class="section">
-    <div class="container">
-      <div class="text-center mb-12">
-        <p class="section-label">Navigate ECI</p>
-        <h2 class="section-title" style="margin-inline:auto;">Everything ECI</h2>
-        <p class="section-desc" style="margin-inline:auto;">Your entry point to everything the association does — research, people, portfolio, and careers.</p>
-      </div>
-      <div class="hub-grid fade-in">
-
-        <!-- About -->
-        <a href="./pages/about.html" class="hub-card">
-          <div class="hub-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          </div>
-          <div>
-            <div class="hub-card__label">Who We Are</div>
-            <h3 class="hub-card__title">About ECI</h3>
-          </div>
-          <p class="hub-card__desc">Our mission, investment philosophy, selection process, and the strategy that drives our research across sectors.</p>
-          <span class="hub-card__arrow">Discover →</span>
-        </a>
-
-        <!-- Team -->
-        <a href="./pages/team.html" class="hub-card">
-          <div class="hub-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <div>
-            <div class="hub-card__label">The People</div>
-            <h3 class="hub-card__title">The Team</h3>
-          </div>
-          <p class="hub-card__desc">Meet the 28 analysts, sector heads, and bureau behind ECI — from portfolio management to TMT, Energy, and beyond.</p>
-          <span class="hub-card__arrow">Meet the team →</span>
-        </a>
-
-        <!-- Pitches & Fund -->
-        <a href="./pages/pitches.html" class="hub-card">
-          <div class="hub-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <div>
-            <div class="hub-card__label">Equity Research</div>
-            <h3 class="hub-card__title">Pitches & Fund</h3>
-          </div>
-          <p class="hub-card__desc">Browse our full library of buy/sell/hold recommendations, view pitch decks, and track our simulated portfolio performance.</p>
-          <span class="hub-card__arrow">View pitches →</span>
-        </a>
-
-        <!-- Join Us -->
-        <a href="./pages/join.html" class="hub-card">
-          <div class="hub-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-          </div>
-          <div>
-            <div class="hub-card__label">Applications</div>
-            <h3 class="hub-card__title">Join ECI</h3>
-          </div>
-          <p class="hub-card__desc">Learn about the recruitment process, what we look for in candidates, and how to apply for a place in the next cohort.</p>
-          <span class="hub-card__arrow">Apply now →</span>
-        </a>
-
-        <!-- Career Outcomes -->
-        <a href="./pages/alumni.html" class="hub-card">
-          <div class="hub-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-          </div>
-          <div>
-            <div class="hub-card__label">Where We End Up</div>
-            <h3 class="hub-card__title">Career Outcomes</h3>
-          </div>
-          <p class="hub-card__desc">See where ECI members land after ESSEC — investment banking, private equity, asset management, and more.</p>
-          <span class="hub-card__arrow">Explore outcomes →</span>
-        </a>
-
-        <!-- Contact & Partners -->
-        <a href="./pages/contact.html" class="hub-card">
-          <div class="hub-card__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </div>
-          <div>
-            <div class="hub-card__label">Get In Touch</div>
-            <h3 class="hub-card__title">Contact & Partners</h3>
-          </div>
-          <p class="hub-card__desc">Reach out to the team, explore partnership opportunities with ECI, or learn how your firm can work with us.</p>
-          <span class="hub-card__arrow">Contact us →</span>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ FEATURED PITCHES ═══ -->
-  <section class="section" style="background:var(--color-surface-2);">
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:var(--space-4);margin-bottom:var(--space-8);">
-        <div>
-          <p class="section-label">Latest Research</p>
-          <h2 class="section-title">Featured Pitches</h2>
-          <p class="section-desc">Our most recent equity research and investment recommendations.</p>
-        </div>
-        <a href="./pages/pitches.html" class="btn btn--secondary">View All →</a>
-      </div>
-      <div class="grid-3 fade-in">
-        <div class="card card--hover pitch-card">
-          <div class="pitch-card__header">
-            <div class="pitch-card__logo">AI</div>
-            <div>
-              <div class="pitch-card__company">Air Liquide</div>
-              <div class="pitch-card__sector">Industrials — Specialty Gases · EPA:AI</div>
+        <!-- Card 1 — Research Shuffler -->
+        <div class="feature-card" id="fc-shuffler">
+          <div class="fc-label">01 — Research</div>
+          <h3 class="fc-title">5 Sector Teams. One Standard.</h3>
+          <p class="fc-desc">Original fundamental analysis across every major sector — from Energy to Financials, TMT to Healthcare.</p>
+          <div class="shuffler-wrap">
+            <div class="shuffler-item" id="sh-0">
+              <span class="shuffler-item__name">TMT / FIG</span>
+              <span class="shuffler-item__sub">Tech · Media · Telecom · Financials</span>
+            </div>
+            <div class="shuffler-item" id="sh-1">
+              <span class="shuffler-item__name">Energy &amp; Utilities</span>
+              <span class="shuffler-item__sub">Oil · Gas · Renewables · Grid</span>
+            </div>
+            <div class="shuffler-item" id="sh-2">
+              <span class="shuffler-item__name">Defensive &amp; Opportunities</span>
+              <span class="shuffler-item__sub">Healthcare · Consumer · Small Caps</span>
             </div>
           </div>
-          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">World leader in industrial gases with structural tailwinds from hydrogen energy transition and semiconductor demand growth.</p>
-          <div class="pitch-card__meta">
-            <span class="tag tag--buy">Buy</span>
-            <span>Apr 2025</span>
-          </div>
         </div>
-        <div class="card card--hover pitch-card">
-          <div class="pitch-card__header">
-            <div class="pitch-card__logo">HAL</div>
-            <div>
-              <div class="pitch-card__company">Halliburton</div>
-              <div class="pitch-card__sector">Energy — Oilfield Services · NYSE:HAL</div>
+
+        <!-- Card 2 — Portfolio Typewriter -->
+        <div class="feature-card" id="fc-typewriter">
+          <div class="fc-label">02 — Portfolio</div>
+          <h3 class="fc-title">Real Capital. Real Decisions.</h3>
+          <p class="fc-desc">Every position in the ECI Fund was voted on by the team after formal pitch review — no simulation.</p>
+          <div class="live-feed">
+            <div class="live-feed__header">
+              <span class="live-dot"></span>
+              <span class="live-feed__tag">Live Feed</span>
             </div>
-          </div>
-          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Leading oilfield services provider benefiting from sustained upstream capex cycle and international expansion momentum.</p>
-          <div class="pitch-card__meta">
-            <span class="tag tag--buy">Buy</span>
-            <span>Mar 2025</span>
+            <div class="typewriter-output" id="typewriter-output"></div><span class="typewriter-cursor"></span>
           </div>
         </div>
-        <div class="card card--hover pitch-card">
-          <div class="pitch-card__header">
-            <div class="pitch-card__logo">TTE</div>
-            <div>
-              <div class="pitch-card__company">TotalEnergies</div>
-              <div class="pitch-card__sector">Energy — Integrated Oil · EPA:TTE</div>
+
+        <!-- Card 3 — Training Scheduler -->
+        <div class="feature-card" id="fc-scheduler">
+          <div class="fc-label">03 — Training</div>
+          <h3 class="fc-title">AlumnEye ATP. IB-Ready.</h3>
+          <p class="fc-desc">Structured sessions with AlumnEye professionals — DCF, LBO, pitch construction, and mock interviews.</p>
+          <div style="position:relative;">
+            <div class="week-grid" id="week-grid">
+              <div class="day-header">S</div>
+              <div class="day-header">M</div>
+              <div class="day-header">T</div>
+              <div class="day-header">W</div>
+              <div class="day-header">T</div>
+              <div class="day-header">F</div>
+              <div class="day-header">S</div>
+              <div class="day-cell" data-day="0">—</div>
+              <div class="day-cell" data-day="1">5</div>
+              <div class="day-cell" data-day="2">6</div>
+              <div class="day-cell" data-day="3">7</div>
+              <div class="day-cell" data-day="4">8</div>
+              <div class="day-cell" data-day="5">9</div>
+              <div class="day-cell" data-day="6">—</div>
             </div>
+            <div class="sched-cursor" id="sched-cursor"></div>
           </div>
-          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-3);">Attractive valuation with best-in-class dividend among European majors and a credible LNG + renewables transition strategy.</p>
-          <div class="pitch-card__meta">
-            <span class="tag tag--buy">Buy</span>
-            <span>Dec 2024</span>
+          <div class="sched-label" id="sched-label" style="font-family:var(--jb);font-size:10px;color:var(--color-text-muted);margin-top:var(--space-3);text-align:center;letter-spacing:.06em;">— Select a session —</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PHILOSOPHY — The Manifesto
+       ═══════════════════════════════════════ -->
+  <section class="philosophy-cinema">
+    <div class="philosophy-cinema__bg"></div>
+    <div class="philosophy-cinema__inner">
+      <span class="philosophy-line philosophy-line--small" id="phil-1">Most finance education is confined to lectures, textbooks, and theoretical models.</span>
+      <span class="philosophy-line philosophy-line--large" id="phil-2">We focus on: <em>Real capital. Real decisions. Real accountability.</em></span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       IMMERSIVE SECTIONS — The Scroll Journey
+       ═══════════════════════════════════════ -->
+
+  <!-- 1 · About -->
+  <section class="imm" style="background:var(--color-primary);color:var(--color-text-inverse);">
+    <div class="imm__inner">
+      <div class="fade-in">
+        <span class="imm__label">Who We Are</span>
+        <h2 class="imm__title">Rigorous research.<br>Real investments.<br>No shortcuts.</h2>
+        <p class="imm__desc">ECI is not a finance club. Every member produces original equity research, defends their thesis under scrutiny from the full team, and contributes to a real portfolio. The standards are high because the goal is real.</p>
+        <a href="./pages/about.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Our Mission →</a>
+      </div>
+      <div class="imm-stat-grid fade-in">
+        <div class="imm-stat-box" style="border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);">
+          <div class="imm-stat-num" style="color:var(--eci-gold);">28</div>
+          <div class="imm-stat-lbl" style="color:rgba(255,255,255,0.55);">Active Members</div>
+        </div>
+        <div class="imm-stat-box" style="border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);">
+          <div class="imm-stat-num" style="color:var(--eci-gold);">20+</div>
+          <div class="imm-stat-lbl" style="color:rgba(255,255,255,0.55);">Pitches</div>
+        </div>
+        <div class="imm-stat-box" style="border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);">
+          <div class="imm-stat-num" style="color:var(--eci-gold);">5</div>
+          <div class="imm-stat-lbl" style="color:rgba(255,255,255,0.55);">Sector Teams</div>
+        </div>
+        <div class="imm-stat-box" style="border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);">
+          <div class="imm-stat-num" style="color:var(--eci-gold);">1</div>
+          <div class="imm-stat-lbl" style="color:rgba(255,255,255,0.55);">Real Portfolio</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Team -->
+  <section class="imm imm--flip" style="background:var(--color-bg);">
+    <div class="imm__inner">
+      <div class="fade-in">
+        <span class="imm__label" style="color:var(--eci-gold);">The People</span>
+        <h2 class="imm__title" style="color:var(--color-text);">28 analysts.<br>5 sector teams.<br>One investment committee.</h2>
+        <p class="imm__desc" style="color:var(--color-text-muted);">From TMT and Financials to Energy, Defensive, and Opportunities — every sector is covered by a dedicated team with a head responsible for research quality and investment decisions.</p>
+        <a href="./pages/team.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Meet the Team →</a>
+      </div>
+      <div class="team-photo-grid fade-in">
+        <div class="team-photo-cell"><img src="./photos/profil-marvin.jpeg" alt="Marvin Braud"><div class="team-photo-cell__name">Marvin · Président</div></div>
+        <div class="team-photo-cell"><img src="./photos/profil-charles.png" alt="Charles Renault"><div class="team-photo-cell__name">Charles · VP</div></div>
+        <div class="team-photo-cell"><img src="./photos/profil-nathan.jpeg" alt="Nathan Swierczinski"><div class="team-photo-cell__name">Nathan · Trésorier</div></div>
+        <div class="team-photo-cell"><img src="./photos/profil-ashley.jpeg" alt="Ashley Klip"><div class="team-photo-cell__name">Ashley · SG</div></div>
+        <div class="team-photo-cell"><img src="./photos/profil-ludo.jpeg" alt="Ludovic Saint-Yves"><div class="team-photo-cell__name">Ludovic · IC</div></div>
+        <div class="team-photo-cell"><img src="./photos/profil-remy.png" alt="Rémy Durand"><div class="team-photo-cell__name">Rémy · IC</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Pitches -->
+  <section class="imm" style="background:var(--color-primary);color:var(--color-text-inverse);">
+    <div class="imm__inner">
+      <div class="fade-in">
+        <span class="imm__label">Equity Research</span>
+        <h2 class="imm__title">Original research.<br>Real recommendations.</h2>
+        <p class="imm__desc">Every pitch starts with weeks of fundamental analysis — financial modelling, competitive positioning, valuation. Then it gets stress-tested in front of the full team before a buy, sell, or hold is issued.</p>
+        <a href="./pages/pitches.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">View All Pitches →</a>
+      </div>
+      <div class="pitch-stack fade-in">
+        <a href="./pages/pitches.html" class="pitch-mini"><div class="pitch-mini__logo">AI</div><div class="pitch-mini__info"><div class="pitch-mini__company">Air Liquide</div><div class="pitch-mini__sector">Industrials · EPA:AI</div></div><span class="tag tag--buy" style="flex-shrink:0;">Buy</span></a>
+        <a href="./pages/pitches.html" class="pitch-mini"><div class="pitch-mini__logo">WMT</div><div class="pitch-mini__info"><div class="pitch-mini__company">Walmart</div><div class="pitch-mini__sector">Consumer · NYSE:WMT</div></div><span class="tag tag--buy" style="flex-shrink:0;">Buy</span></a>
+        <a href="./pages/pitches.html" class="pitch-mini"><div class="pitch-mini__logo">BNP</div><div class="pitch-mini__info"><div class="pitch-mini__company">BNP Paribas</div><div class="pitch-mini__sector">Financials · EPA:BNP</div></div><span class="tag tag--buy" style="flex-shrink:0;">Buy</span></a>
+        <a href="./pages/pitches.html" class="pitch-mini"><div class="pitch-mini__logo">HAL</div><div class="pitch-mini__info"><div class="pitch-mini__company">Halliburton</div><div class="pitch-mini__sector">Energy · NYSE:HAL</div></div><span class="tag tag--buy" style="flex-shrink:0;">Buy</span></a>
+        <a href="./pages/pitches.html" class="pitch-mini"><div class="pitch-mini__logo">BA</div><div class="pitch-mini__info"><div class="pitch-mini__company">Boeing</div><div class="pitch-mini__sector">Industrials · NYSE:BA</div></div><span class="tag tag--sell" style="flex-shrink:0;">Sell</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Fund -->
+  <section class="imm imm--flip" style="background:oklch(from var(--eci-gold,#c9a84c) 0.94 0.04 83);">
+    <div class="imm__inner">
+      <div class="fade-in">
+        <span class="imm__label" style="color:var(--eci-navy);">The ECI Fund</span>
+        <h2 class="imm__title" style="color:var(--eci-navy);">A real portfolio.<br>Managed by students.</h2>
+        <p class="imm__desc" style="color:var(--eci-navy);opacity:0.70;">Every position in the ECI Fund originated from a formal pitch voted on by the team. No simulation — real capital, real decisions, real accountability.</p>
+        <a href="./pages/fund.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Track the Fund →</a>
+      </div>
+      <div class="fade-in">
+        <div class="fund-kpi-row">
+          <div class="fund-kpi" style="background:rgba(255,255,255,0.5);">
+            <div class="fund-kpi__val" style="color:#16a34a;">+8.00%</div>
+            <div class="fund-kpi__lbl" style="color:var(--eci-navy);">Cumulative Return</div>
+          </div>
+          <div class="fund-kpi" style="background:rgba(255,255,255,0.5);">
+            <div class="fund-kpi__val" style="color:var(--eci-navy);">€779.97</div>
+            <div class="fund-kpi__lbl" style="color:var(--eci-navy);">Portfolio NAV</div>
+          </div>
+          <div class="fund-kpi" style="background:rgba(255,255,255,0.5);">
+            <div class="fund-kpi__val" style="color:#16a34a;">+2.22pp</div>
+            <div class="fund-kpi__lbl" style="color:var(--eci-navy);">vs MSCI World</div>
+          </div>
+          <div class="fund-kpi" style="background:rgba(255,255,255,0.5);">
+            <div class="fund-kpi__val" style="color:var(--eci-navy);">3</div>
+            <div class="fund-kpi__lbl" style="color:var(--eci-navy);">Active Positions</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.55);border-radius:var(--radius-lg);padding:var(--space-5);">
+          <div style="font-family:var(--jb);font-size:10px;font-weight:600;color:var(--eci-navy);opacity:0.55;text-transform:uppercase;letter-spacing:.10em;margin-bottom:var(--space-3);">Cumulative Return · Oct 2025 – May 2026</div>
+          <svg viewBox="0 0 400 100" preserveAspectRatio="none" style="width:100%;height:72px;">
+            <defs><linearGradient id="fg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c9a84c" stop-opacity="0.35"/><stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/></linearGradient></defs>
+            <path fill="url(#fg2)" d="M0,50 L57,52 L114,51 L171,53 L228,60 L285,59 L342,43 L400,30 L400,100 L0,100 Z" opacity="0.85"/>
+            <polyline fill="none" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="0,50 57,52 114,51 171,53 228,60 285,59 342,43 400,30"/>
+            <polyline fill="none" stroke="rgba(17,61,99,0.3)" stroke-width="1.5" stroke-dasharray="5,4" points="0,52 57,48 114,51 171,47 228,48 285,53 342,49 400,43"/>
+          </svg>
+          <div style="display:flex;gap:var(--space-5);margin-top:var(--space-2);">
+            <span style="font-family:var(--jb);font-size:10px;font-weight:600;color:var(--eci-navy);opacity:0.6;display:flex;align-items:center;gap:6px;"><span style="width:14px;height:2px;background:#c9a84c;border-radius:2px;display:inline-block;"></span>ECI Fund</span>
+            <span style="font-family:var(--jb);font-size:10px;font-weight:600;color:var(--eci-navy);opacity:0.6;display:flex;align-items:center;gap:6px;"><span style="width:14px;height:2px;background:rgba(17,61,99,0.35);border-radius:2px;display:inline-block;"></span>MSCI World</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ WHAT WE DO — 3 pillars ═══ -->
-  <section class="section">
-    <div class="container">
-      <div class="text-center mb-12">
-        <p class="section-label">Our Activities</p>
-        <h2 class="section-title" style="margin-inline:auto;">What We Do</h2>
-        <p class="section-desc" style="margin-inline:auto;">Three pillars that define the ECI experience — research, investing, and education.</p>
+  <!-- 5 · Join -->
+  <section class="imm" style="background:var(--color-primary);color:var(--color-text-inverse);">
+    <div class="imm__inner">
+      <div class="fade-in">
+        <span class="imm__label">Recruitment</span>
+        <h2 class="imm__title">Ready to build your finance career from day one?</h2>
+        <p class="imm__desc">Applications open every September. No prior experience required — just genuine interest in markets, a strong work ethic, and the drive to produce research that stands up to scrutiny.</p>
+        <div style="display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-6);">
+          <a href="./pages/join.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Apply to Join</a>
+          <a href="./pages/join.html" class="btn-magnetic btn-magnetic--outline" style="display:inline-flex;">Learn More</a>
+        </div>
       </div>
-      <div class="grid-3 fade-in">
-        <div class="card" style="text-align:center;">
-          <div style="width:52px;height:52px;margin:0 auto var(--space-4);border-radius:var(--radius-md);background:oklch(from var(--color-accent) l c h / 0.10);display:flex;align-items:center;justify-content:center;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          </div>
-          <h3 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-base);margin-bottom:var(--space-2);">Equity Research</h3>
-          <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;">Deep-dive fundamental analysis across five sector teams. Every pitch is grounded in financial modelling, valuation, and investment thesis construction.</p>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div style="width:52px;height:52px;margin:0 auto var(--space-4);border-radius:var(--radius-md);background:oklch(from var(--color-accent) l c h / 0.10);display:flex;align-items:center;justify-content:center;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-          </div>
-          <h3 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-base);margin-bottom:var(--space-2);">Portfolio Management</h3>
-          <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;">Members manage a real simulated portfolio with disciplined position sizing, risk management, and quarterly performance reviews.</p>
-        </div>
-        <div class="card" style="text-align:center;">
-          <div style="width:52px;height:52px;margin:0 auto var(--space-4);border-radius:var(--radius-md);background:oklch(from var(--color-accent) l c h / 0.10);display:flex;align-items:center;justify-content:center;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          </div>
-          <h3 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-base);margin-bottom:var(--space-2);">Member Training</h3>
-          <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;">Exclusive Analyst Training Program (ATP) sessions led by AlumnEye, internal DCF & LBO workshops, and structured peer feedback — all designed to prepare members for IB and AM recruitment.</p>
-        </div>
+      <div class="recruit-steps fade-in">
+        <div class="recruit-step"><div class="recruit-step__num">1</div><div><div class="recruit-step__title">Submit your application</div><div class="recruit-step__desc" style="color:rgba(255,255,255,0.60);">A short motivation letter and your background. We want to understand why markets interest you — not your GPA.</div></div></div>
+        <div class="recruit-step"><div class="recruit-step__num">2</div><div><div class="recruit-step__title">Investment interview</div><div class="recruit-step__desc" style="color:rgba(255,255,255,0.60);">A 20-minute conversation about a stock or market theme of your choice. Preparation matters — curiosity matters more.</div></div></div>
+        <div class="recruit-step"><div class="recruit-step__num">3</div><div><div class="recruit-step__title">Join your sector team</div><div class="recruit-step__desc" style="color:rgba(255,255,255,0.60);">Assigned to one of 5 research teams. Start producing pitches, attend weekly sessions, and contribute to the fund from week one.</div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ PARTNER STRIP ═══ -->
-  <section style="padding-block:var(--space-10);">
-    <div class="container">
-      <div class="partner-strip">
-        <span class="partner-strip__label">Official Partner</span>
-        <a href="./pages/contact.html" class="partner-logo" title="AlumnEye — Official ECI Partner">
-          AlumnEye
-        </a>
-        <span class="partner-strip__label" style="font-size:var(--text-xs);max-width:260px;text-align:center;line-height:1.5;">Providing ECI members with exclusive access to the Analyst Training Program, financial modelling workshops, and career mentoring.</span>
-        <a href="./pages/contact.html" class="btn btn--secondary" style="font-size:var(--text-sm);">Become a Partner</a>
+  <!-- 6 · Partners -->
+  <section class="imm imm--flip" style="background:var(--color-surface-2);">
+    <div class="imm__inner">
+      <div class="fade-in">
+        <span class="imm__label" style="color:var(--eci-gold);">Official Partner</span>
+        <h2 class="imm__title" style="color:var(--color-text);">Training with the best in French finance.</h2>
+        <p class="imm__desc" style="color:var(--color-text-muted);">ECI members get exclusive access to AlumnEye's Analyst Training Program — the same program used to prepare candidates for Goldman Sachs, JPMorgan, and KKR recruitment in France.</p>
+        <a href="./pages/partners.html" class="btn-magnetic btn-magnetic--gold" style="display:inline-flex;">Partnership Details →</a>
+      </div>
+      <div class="benefit-grid fade-in">
+        <div class="benefit-box"><div class="benefit-box__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div class="benefit-box__title">ATP Sessions</div><div class="benefit-box__desc">3 structured sessions covering financial statements, DCF, and pitch construction — led by AlumnEye professionals.</div></div>
+        <div class="benefit-box"><div class="benefit-box__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="benefit-box__title">Financial Modelling</div><div class="benefit-box__desc">Hands-on Excel and modelling workshops guided by professionals from leading investment banks and PE firms.</div></div>
+        <div class="benefit-box"><div class="benefit-box__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></div><div class="benefit-box__title">Career Mentoring</div><div class="benefit-box__desc">Access to AlumnEye's mentor network for IB / AM / PE recruitment prep, CV review, and mock technical interviews.</div></div>
+        <div class="benefit-box"><div class="benefit-box__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="benefit-box__title">Alumni Network</div><div class="benefit-box__desc">Direct connections spanning Goldman Sachs, JPMorgan, BNP, Lazard, KKR, and more across France and Europe.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ JOIN CTA ═══ -->
-  <section class="section" style="background:var(--color-primary);color:var(--color-text-inverse);text-align:center;">
-    <div class="container" style="max-width:var(--content-default);">
-      <p class="section-label" style="color:var(--color-accent);">Applications Open</p>
-      <h2 style="font-family:var(--font-display);font-weight:800;font-size:var(--text-xl);margin-bottom:var(--space-3);">Ready to join ECI?</h2>
-      <p style="opacity:0.8;margin-bottom:var(--space-6);max-width:48ch;margin-inline:auto;">Whether you are new to investing or have prior experience, ECI gives you the tools, the team, and the real-world practice to accelerate your finance career at ESSEC and beyond.</p>
-      <div style="display:flex;justify-content:center;gap:var(--space-3);flex-wrap:wrap;">
-        <a href="./pages/join.html" class="btn btn--accent btn--lg">Apply Now</a>
-        <a href="./pages/about.html" class="btn btn--secondary btn--lg" style="border-color:oklch(from var(--color-text-inverse) l c h / 0.3);color:var(--color-text-inverse);">Learn More</a>
-      </div>
+  <!-- ═══════════════════════════════════════
+       LINKEDIN CTA
+       ═══════════════════════════════════════ -->
+  <section class="linkedin-cta">
+    <div class="linkedin-cta__inner">
+      <div class="linkedin-cta__eyebrow">Stay Connected</div>
+      <h2 class="linkedin-cta__title">Never miss a pitch.</h2>
+      <p class="linkedin-cta__sub">Follow ECI on LinkedIn to receive our latest equity research publications, recruitment announcements, and event updates from the ESSEC Capital Investments community.</p>
+      <a href="https://www.linkedin.com/company/essec-capital-investments-eci/" target="_blank" rel="noopener noreferrer" class="btn-linkedin">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        Follow on LinkedIn
+      </a>
     </div>
   </section>
+
+  <!-- ── System Status Bar ── -->
+  <div class="sys-status-bar">
+    <div class="sys-status-bar__inner">
+      <div class="sys-status">
+        <span class="sys-dot"></span>
+        <span>All systems operational</span>
+        <span style="color:rgba(255,255,255,0.15);margin:0 4px;">·</span>
+        <span>ECI Website v2.0</span>
+      </div>
+      <div class="sys-version" style="font-family:var(--jb);">© 2025 ESSEC Capital Investments</div>
+    </div>
+  </div>
 
 </main>
 
 <div id="footer-slot"></div>
-<script src="./components.js?v=4"></script>
+
+<!-- ── GSAP ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="./components.js?v=5"></script>
+
+<script>
+/* ═══════════════════════════════════════
+   ECI DIGITAL INSTRUMENT — Animations
+   ═══════════════════════════════════════ */
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Hero entrance ── */
+document.addEventListener('DOMContentLoaded', function() {
+  // Slow parallax on hero bg
+  var bg = document.getElementById('hero-bg');
+  if (bg) {
+    setTimeout(function() { bg.style.transform = 'scale(1)'; }, 100);
+    window.addEventListener('scroll', function() {
+      var y = window.scrollY;
+      bg.style.transform = 'scale(1.04) translateY(' + (y * 0.25) + 'px)';
+    }, { passive: true });
+  }
+
+  // Hero stagger
+  var tl = gsap.timeline({ delay: 0.3 });
+  tl.to('#h-eyebrow', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0)
+    .to('#h-sans',    { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' }, 0.15)
+    .to('#h-serif',   { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, 0.28)
+    .to('#h-sub',     { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0.44)
+    .to('#h-actions', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.56)
+    .to('#h-scroll',  { opacity: 1,       duration: 1.0, ease: 'power2.out' }, 0.80);
+
+  // Set initial states
+  gsap.set(['#h-eyebrow','#h-sans','#h-serif','#h-sub','#h-actions'], { y: 45 });
+
+  /* ── Pill nav: morph on scroll ── */
+  var header = document.getElementById('site-header');
+  var heroSection = document.getElementById('hero-cinema');
+  if (header && heroSection) {
+    var navObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        header.classList.toggle('site-header--scrolled', !e.isIntersecting);
+      });
+    }, { threshold: 0.05 });
+    navObserver.observe(heroSection);
+  }
+
+  /* ── Stats reveal ── */
+  gsap.from('.stat-cinema', {
+    scrollTrigger: { trigger: '.stats-cinema-section', start: 'top 85%' },
+    y: 30, opacity: 0, duration: 0.7, stagger: 0.09, ease: 'power3.out'
+  });
+
+  /* ── Feature cards reveal ── */
+  gsap.from('.feature-card', {
+    scrollTrigger: { trigger: '.features-cinema', start: 'top 75%' },
+    y: 56, opacity: 0, duration: 0.85, stagger: 0.14, ease: 'power3.out'
+  });
+  gsap.from('.features-header', {
+    scrollTrigger: { trigger: '.features-cinema', start: 'top 80%' },
+    y: 36, opacity: 0, duration: 0.75, ease: 'power3.out'
+  });
+
+  /* ── Philosophy reveal ── */
+  var phil1 = document.getElementById('phil-1');
+  var phil2 = document.getElementById('phil-2');
+  if (phil1) {
+    ScrollTrigger.create({
+      trigger: '.philosophy-cinema',
+      start: 'top 70%',
+      onEnter: function() {
+        gsap.to(phil1, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' });
+        gsap.to(phil2, { opacity: 1, y: 0, duration: 1.3, ease: 'power3.out', delay: 0.25 });
+      }
+    });
+  }
+
+  /* ── Immersive sections reveal ── */
+  document.querySelectorAll('.imm').forEach(function(section) {
+    gsap.from(section.querySelectorAll('.fade-in'), {
+      scrollTrigger: { trigger: section, start: 'top 72%' },
+      y: 45, opacity: 0, duration: 0.9, stagger: 0.13, ease: 'power3.out'
+    });
+  });
+
+  /* ── LinkedIn CTA reveal ── */
+  gsap.from('.linkedin-cta__inner > *', {
+    scrollTrigger: { trigger: '.linkedin-cta', start: 'top 75%' },
+    y: 40, opacity: 0, duration: 0.85, stagger: 0.12, ease: 'power3.out'
+  });
+
+  /* ─────────────────────────────────────
+     FEATURE CARD 1 — Research Shuffler
+     ───────────────────────────────────── */
+  (function() {
+    var items = document.querySelectorAll('.shuffler-item');
+    if (!items.length) return;
+    var active = 0;
+    items.forEach(function(el, i) {
+      el.style.transition = 'transform 0.68s cubic-bezier(0.34,1.56,0.64,1), opacity 0.42s ease';
+      el.style.transform = i === 0 ? 'translateY(0) scale(1)' : 'translateY(110%) scale(0.92)';
+      el.style.opacity   = i === 0 ? '1' : '0';
+      el.style.zIndex    = String(items.length - i);
+    });
+    function cycle() {
+      var next = (active + 1) % items.length;
+      items[active].style.transform = 'translateY(-110%) scale(0.92)';
+      items[active].style.opacity   = '0';
+      items[next].style.transform   = 'translateY(0) scale(1)';
+      items[next].style.opacity     = '1';
+      items[next].style.zIndex      = String(items.length + 1);
+      active = next;
+    }
+    setInterval(cycle, 2800);
+  })();
+
+  /* ─────────────────────────────────────
+     FEATURE CARD 2 — Portfolio Typewriter
+     ───────────────────────────────────── */
+  (function() {
+    var output = document.getElementById('typewriter-output');
+    if (!output) return;
+    var messages = [
+      '> NEX (Nexans SA) initiated · BUY',
+      '  Unrealized P&L: +€28.20 (+21.36%)',
+      '> KO (Coca-Cola) · HOLD confirmed',
+      '> Portfolio NAV: €779.97',
+      '  Cumulative return: +8.00%',
+      '> MSCI World outperf: +2.22pp',
+      '> ATP Session 3 · LBO completed ✓',
+    ];
+    var msgIdx = 0, charIdx = 0;
+    function typeChar() {
+      if (charIdx < messages[msgIdx].length) {
+        output.textContent += messages[msgIdx][charIdx++];
+        setTimeout(typeChar, 36 + Math.random() * 20);
+      } else {
+        setTimeout(function() {
+          output.textContent = '';
+          charIdx = 0;
+          msgIdx = (msgIdx + 1) % messages.length;
+          setTimeout(typeChar, 150);
+        }, 2000);
+      }
+    }
+    setTimeout(typeChar, 1000);
+  })();
+
+  /* ─────────────────────────────────────
+     FEATURE CARD 3 — Training Scheduler
+     ───────────────────────────────────── */
+  (function() {
+    var days  = document.querySelectorAll('.day-cell');
+    var cursor = document.getElementById('sched-cursor');
+    var label  = document.getElementById('sched-label');
+    var grid   = document.getElementById('week-grid');
+    if (!cursor || !days.length || !grid) return;
+
+    var schedule = [
+      { idx: 1, name: 'Pitch Session · Mon' },
+      { idx: 3, name: 'Research Day · Wed' },
+      { idx: 5, name: 'ATP Training · Fri' },
+    ];
+    var step = 0;
+
+    function moveTo() {
+      var s = schedule[step % schedule.length];
+      var target = days[s.idx];
+      var gridR  = grid.getBoundingClientRect();
+      var cellR  = target.getBoundingClientRect();
+      cursor.style.left = (cellR.left - gridR.left + cellR.width/2 - 5) + 'px';
+      cursor.style.top  = (cellR.top  - gridR.top  + cellR.height/2 - 5) + 'px';
+
+      setTimeout(function() {
+        target.style.transform = 'scale(0.88)';
+        setTimeout(function() {
+          target.style.transform = '';
+          // Deactivate previous
+          days.forEach(function(d) { d.classList.remove('active'); });
+          target.classList.add('active');
+          if (label) label.textContent = s.name;
+          step++;
+          setTimeout(moveTo, 1600);
+        }, 260);
+      }, 550);
+    }
+    // Position cursor off-screen initially
+    cursor.style.left = '-20px'; cursor.style.top = '50%';
+    setTimeout(moveTo, 1400);
+  })();
+
+}); // DOMContentLoaded
+</script>
 </body>
 </html>

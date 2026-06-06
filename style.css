@@ -206,26 +206,24 @@
 .logo svg { width: 36px; height: 36px; }
 
 /* Full lockup — 2000×2000 transparent PNG.
-   Render it large then flex-center to show only the content zone.
-   Content sits at the centre ~30% of height × ~70% of width.
-   Adjust --logo-content-h to resize (controls everything else). */
-:root { --logo-content-h: 56px; }
+   Show the center ~47% of the image height so content is
+   always fully visible regardless of exact canvas margins.
+   Change --logo-img-w to resize everything. */
+:root { --logo-img-w: 110px; }
 
 .eci-logo-full-wrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  /* box = desired content size */
-  height: var(--logo-content-h);
-  width: calc(var(--logo-content-h) / 0.30 * 0.70);
+  /* clip to center strip — generous enough to never cut content */
+  height: 52px;
   overflow: hidden;
 }
 .eci-logo-full {
-  /* render image tall enough so content = --logo-content-h */
-  height: calc(var(--logo-content-h) / 0.30);
-  width: auto;        /* stays square (2000×2000) */
-  flex-shrink: 0;     /* never let flexbox shrink it */
+  width: var(--logo-img-w);
+  height: auto;     /* stays square (2000×2000) → same as width */
+  flex-shrink: 0;
 }
 
 /* Icon mark — footer */

@@ -1,0 +1,185 @@
+[
+  {
+    "test": "B1_PP_zero",
+    "severity": "HIGH",
+    "class": "SILENT-WRONG",
+    "desc": "PP=0: model says READY (should refuse)",
+    "evidence": {
+      "ready": true,
+      "at": 1,
+      "int": "0"
+    }
+  },
+  {
+    "test": "B1_PP_negative",
+    "severity": "HIGH",
+    "class": "SILENT-WRONG",
+    "desc": "PP=-500: negative PP accepted (interest=0)",
+    "evidence": {
+      "interest": 0,
+      "at": 1
+    }
+  },
+  {
+    "test": "B1_PP_tiny",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "PP=0.001mm: ready=True, at_fail=0",
+    "evidence": {
+      "interest": "0.000010"
+    }
+  },
+  {
+    "test": "B1_PP_huge",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "PP=1,000,000mm: ready=True, at_fail=1",
+    "evidence": {
+      "interest": "9899.4431"
+    }
+  },
+  {
+    "test": "B1_PP_text",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "PP=text: model correctly refuses",
+    "evidence": {
+      "ready": false,
+      "at": 23
+    }
+  },
+  {
+    "test": "B1_PP_blank",
+    "severity": "HIGH",
+    "class": "SILENT-WRONG",
+    "desc": "PP=blank: model says READY (should refuse)",
+    "evidence": {
+      "ready": true,
+      "at": 0,
+      "int": "9.8994"
+    }
+  },
+  {
+    "test": "B1_tax_slip",
+    "severity": "HIGH",
+    "class": "SILENT-WRONG",
+    "desc": "Tax=26.6 (should be 0.266): AT passes, EPS=-7.1145",
+    "evidence": {
+      "eps": "-7.1145",
+      "bl_eps": "0.1881",
+      "note": "2560% tax rate accepted silently"
+    }
+  },
+  {
+    "test": "B1_tax_101",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "Tax=101%: AT passes, EPS=-0.0226",
+    "evidence": {
+      "eps": -0.0225659341979376
+    }
+  },
+  {
+    "test": "B1_tax_neg",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "Tax=-10%: AT passes (negative tax \u2192 income is a subsidy?)",
+    "evidence": {
+      "eps": "0.2851"
+    }
+  },
+  {
+    "test": "B1_shares=0",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "shares=0: EPS=None (blank)",
+    "evidence": {}
+  },
+  {
+    "test": "B1_shares=-100",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "shares=-100: EPS=-0.8143",
+    "evidence": {
+      "at": 0
+    }
+  },
+  {
+    "test": "B1_shares=blank",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "shares=blank: EPS=0.1881",
+    "evidence": {
+      "at": 0
+    }
+  },
+  {
+    "test": "B1_H0",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Horizon=0: AT fail=1, rate=0.0396",
+    "evidence": {
+      "at": 1,
+      "int": "9.8994"
+    }
+  },
+  {
+    "test": "B1_H1",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Horizon=1: AT fail=0, rate=0.0396",
+    "evidence": {
+      "at": 0,
+      "int": "9.8994"
+    }
+  },
+  {
+    "test": "B1_H9",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "Horizon=9: AT fail=0, rate=0.0396",
+    "evidence": {
+      "at": 0,
+      "int": "9.8994"
+    }
+  },
+  {
+    "test": "B1_early_close",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "Close before signing: AT fail=0",
+    "evidence": {
+      "at": 0,
+      "verdict": "\u2705 ALL CHECKS PASS \u2014 arithmetic verified and a real deal is loaded"
+    }
+  },
+  {
+    "test": "B1_mix99",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Mix=99%: AT fail=1",
+    "evidence": {
+      "verdict": "\u274c 1 CHECK(S) FAILING \u2014 do not use these numbers"
+    }
+  },
+  {
+    "test": "B1_mix101",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Mix=101%: AT fail=1",
+    "evidence": {
+      "verdict": "\u274c 1 CHECK(S) FAILING \u2014 do not use these numbers"
+    }
+  },
+  {
+    "test": "B1_cash_gt_pp",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Cash=1500>PP=1000: amount_raised=0",
+    "evidence": {
+      "amt": 0,
+      "int": "0",
+      "at": 1
+    }
+  }
+]

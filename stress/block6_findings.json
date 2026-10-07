@@ -1,0 +1,59 @@
+[
+  {
+    "test": "R1_dash_engine",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Dashboard matches E3 engine outputs",
+    "evidence": {
+      "dash_rate": "0.0396",
+      "e3_rate": "0.0396"
+    }
+  },
+  {
+    "test": "R2_dash_eps",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Dashboard EPS matches E4 (0.1881)",
+    "evidence": {}
+  },
+  {
+    "test": "R3_hs_e3_finres",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Henkel Summary finres matches E3 (-11.9574)",
+    "evidence": {}
+  },
+  {
+    "test": "R4_at_consistent",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "AT verdict consistent: 0 failures, verdict='\u2705 ALL CHECKS PASS \u2014 arithmetic verified and a real'",
+    "evidence": {}
+  },
+  {
+    "test": "R5_stress_impact",
+    "severity": "MEDIUM",
+    "class": "MISLEADING",
+    "desc": "Stress scenario only changes 0 outputs (expected broad impact)",
+    "evidence": {
+      "diffs": []
+    }
+  },
+  {
+    "test": "R6_funding_only",
+    "severity": "MEDIUM",
+    "class": "MISLEADING",
+    "desc": "Funding-only toggle doesn't change EPS (0.1881)",
+    "evidence": {
+      "bl_eps": 0.188057622384049,
+      "fo_eps": 0.188057622384049
+    }
+  },
+  {
+    "test": "R7_bal_chain",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Balance chain looks reasonable: open=1000, close=1000",
+    "evidence": {}
+  }
+]

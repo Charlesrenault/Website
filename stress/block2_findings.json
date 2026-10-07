@@ -1,0 +1,94 @@
+[
+  {
+    "test": "P1_swap_mix",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Swap EUR/USD rows: AT catches (1 failures)",
+    "evidence": {}
+  },
+  {
+    "test": "P2_text_pp",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "PP=text: model refuses or AT catches (ready=False, at=23)",
+    "evidence": {}
+  },
+  {
+    "test": "P2_text_tax",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "tax=text: model refuses or AT catches (ready=True, at=7)",
+    "evidence": {}
+  },
+  {
+    "test": "P2_text_mix",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "mix=text: model refuses or AT catches (ready=True, at=4)",
+    "evidence": {}
+  },
+  {
+    "test": "P3_dup_ccy",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Duplicate EUR: AT catches (1 failures)",
+    "evidence": {}
+  },
+  {
+    "test": "P4_mix_zero",
+    "severity": "HIGH",
+    "class": "SILENT-WRONG",
+    "desc": "Mix=0%: model ready, AT passes",
+    "evidence": {
+      "rate": "0.0396",
+      "amount": "1000"
+    }
+  },
+  {
+    "test": "P5_neg_mix",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Negative mix: AT catches (1 failures)",
+    "evidence": {}
+  },
+  {
+    "test": "P6_date_num",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Date serial: AT catches (2 failures)",
+    "evidence": {}
+  },
+  {
+    "test": "P7_sale_mismatch",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "Sale of GBP (not in mix): AT passes, shed=0",
+    "evidence": {
+      "shed": 0,
+      "post_sale_int": "9.8994"
+    }
+  },
+  {
+    "test": "P8_long_text",
+    "severity": "LOW",
+    "class": "SILENT-WRONG",
+    "desc": "1000-char text in scenario selector: model runs",
+    "evidence": {
+      "ready": true
+    }
+  },
+  {
+    "test": "P9_formula_inject",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Formula injection handled (ready=True, at=0)",
+    "evidence": {}
+  },
+  {
+    "test": "P10_all_eur",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "All EUR: AT catches (1 failures)",
+    "evidence": {}
+  }
+]

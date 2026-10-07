@@ -1,0 +1,155 @@
+[
+  {
+    "test": "S1",
+    "severity": "MEDIUM",
+    "class": "MISLEADING",
+    "desc": "Y1 EPS swings \u20ac0.0591/share from Jan to Dec closing (EBIT full-year, interest prorated)",
+    "evidence": {
+      "jan31_eps": "0.1453",
+      "sep30_eps": "0.1881",
+      "dec31_eps": "0.2044",
+      "jan31_ebit": "120",
+      "dec31_ebit": "120",
+      "note": "EBIT is always full year; only financing prorated"
+    }
+  },
+  {
+    "test": "S2",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Operating tax B42: changes EPS=True, changes interest=False",
+    "evidence": {
+      "bl_eps": "0.1881",
+      "30pct_eps": "0.1742",
+      "15pct_eps": "0.2158",
+      "bl_int": "9.8994",
+      "30pct_int": "9.8994"
+    }
+  },
+  {
+    "test": "S3",
+    "severity": "MEDIUM",
+    "class": "FALSE-ALARM",
+    "desc": "Dec closing: Y1 interest=0 (factor=0), AT fail",
+    "evidence": {
+      "interest_y1": 0,
+      "at_failing": 1,
+      "eps_y1": "0.2044",
+      "note": "month=12\u2192factor=0\u2192interest=0 but deal is funded"
+    }
+  },
+  {
+    "test": "S3b",
+    "severity": "LOW",
+    "class": "MISLEADING",
+    "desc": "Mid-month (Sep15) = end-of-month (Sep30) \u2014 day ignored, only MONTH used",
+    "evidence": {
+      "sep15_int": "9.8994",
+      "sep30_int": "9.8994",
+      "note": "15 days of additional interest lost"
+    }
+  },
+  {
+    "test": "S5",
+    "severity": "MEDIUM",
+    "class": "LOUD-OK",
+    "desc": "GBP in mix with no entity route: AT flags it",
+    "evidence": {
+      "at_failing": 1,
+      "at_verdict": "\u274c 1 CHECK(S) FAILING \u2014 do not use these numbers",
+      "failing_list": "['Row22: \u274c FAIL \u2014 mix \u2260 100%']"
+    }
+  },
+  {
+    "test": "S7a",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Hardcoded E3!C65=999.99: AT catches it",
+    "evidence": {
+      "at_failing": 3,
+      "at_verdict": "\u274c 3 CHECK(S) FAILING \u2014 do not use these numbers",
+      "failing": "['Row12: \u274c FAIL \u2014 Y1 interest off', 'Row28: \u274c FAIL \u2014 bridge doesnt tie', 'Row31: \u274c FAIL \u2014 magnitude slip']"
+    }
+  },
+  {
+    "test": "S7b",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Hardcoded E3!C54=99%: AT catches it",
+    "evidence": {
+      "at_failing": 2,
+      "at_verdict": "\u274c 2 CHECK(S) FAILING \u2014 do not use these numbers",
+      "failing": "['Row50: \u274c FAIL \u2014 instrument split off', 'Row51: \u274c FAIL \u2014 D9 wiring broke']"
+    }
+  },
+  {
+    "test": "S7c",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Hardcoded E4!C57=\u20ac5/share: AT catches it",
+    "evidence": {
+      "at_failing": 4,
+      "at_verdict": "\u274c 4 CHECK(S) FAILING \u2014 do not use these numbers"
+    }
+  },
+  {
+    "test": "S7d",
+    "severity": "LOW",
+    "class": "MISLEADING",
+    "desc": "Hardcoded AT verdict cell: verdict says PASS but is a hardcode",
+    "evidence": {
+      "note": "AT cell B5/B6 can be overwritten \u2014 no protection"
+    }
+  },
+  {
+    "test": "S9a",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "Lowercase 'eur': shed=0, AT pass",
+    "evidence": {
+      "shed": 0,
+      "at": 0,
+      "note": "lowercase ISO should match EUR leg"
+    }
+  },
+  {
+    "test": "S9b",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "Event year 0: AT pass (no warning!)",
+    "evidence": {
+      "at_failing": 0,
+      "shed": "2.3913"
+    }
+  },
+  {
+    "test": "S9c",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "Event year 9 (beyond horizon 8): AT pass (inert sale?)",
+    "evidence": {
+      "shed": "0",
+      "at": 0
+    }
+  },
+  {
+    "test": "S9d",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "EBIT share 150%: op_retained=1, AT pass",
+    "evidence": {
+      "op_retained": 1,
+      "at": 0
+    }
+  },
+  {
+    "test": "S9e",
+    "severity": "LOW",
+    "class": "LOUD-OK",
+    "desc": "Funding-only (B65=N) with EBIT D=30%: op_retained=1",
+    "evidence": {
+      "op_retained": 1,
+      "note": "B65=N should ignore EBIT share (operating side stays 100%)"
+    }
+  }
+]

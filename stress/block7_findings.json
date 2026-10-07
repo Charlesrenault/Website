@@ -1,0 +1,58 @@
+[
+  {
+    "test": "E1_reproducibility",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Baseline is perfectly reproducible (2 runs identical)",
+    "evidence": {}
+  },
+  {
+    "test": "E2_identity",
+    "severity": "MEDIUM",
+    "class": "MISLEADING",
+    "desc": "Writing same values back changes 5 outputs",
+    "evidence": {
+      "diffs": [
+        [
+          "dash_eps_y1",
+          "0.1881",
+          "0.1815"
+        ],
+        [
+          "e4_net_income_y1",
+          "81.4290",
+          "79.5090"
+        ],
+        [
+          "e4_eps_y1",
+          "0.1881",
+          "0.1815"
+        ],
+        [
+          "e4_eps_y2",
+          "0.1550",
+          "0.1486"
+        ],
+        [
+          "hs_post_sale_eps",
+          "0.1881",
+          "0.1815"
+        ]
+      ]
+    }
+  },
+  {
+    "test": "E3_revert",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Reversibility: change PP\u21922000\u21921000 gives original results",
+    "evidence": {}
+  },
+  {
+    "test": "E4_many",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Many overrides: AT catches (1 failures)",
+    "evidence": {}
+  }
+]

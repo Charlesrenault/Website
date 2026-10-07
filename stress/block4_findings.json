@@ -1,0 +1,124 @@
+[
+  {
+    "test": "M1",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "PP\u00d72: rate unchanged, interest\u00d72, amount\u00d72 \u2014 linearity holds",
+    "evidence": {
+      "rate_bl": 0.0395977723671148,
+      "rate_2x": 0.0395977723671148,
+      "int_ratio": "2.0000",
+      "amt_ratio": "2.0000"
+    }
+  },
+  {
+    "test": "M3",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Single instrument: model recalculates correctly",
+    "evidence": {
+      "allin": "0.0424",
+      "at": "\u2705 ALL CHECKS PASS \u2014 arithmetic verified and a real deal is loaded"
+    }
+  },
+  {
+    "test": "M4",
+    "severity": "LOW",
+    "class": "SILENT-WRONG",
+    "desc": "Closing +12m: Y1 differs \u2014 may be curve-dependent (rate differs)",
+    "evidence": {
+      "bl_rate": "0.0396",
+      "m4_rate": "0.0401",
+      "bl_int": "9.8994",
+      "m4_int": "10.0137"
+    }
+  },
+  {
+    "test": "M5",
+    "severity": "HIGH",
+    "class": "CRASH",
+    "desc": "Could not compute Jan1/Dec31 interest comparison",
+    "evidence": {
+      "jan1": 36.4168674472698,
+      "dec31": 0
+    }
+  },
+  {
+    "test": "M8",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Both FCF modes pass AT checks",
+    "evidence": {
+      "amortise_int": "9.8296",
+      "earns_int": "9.8994",
+      "amortise_netfin": "-11.9346",
+      "earns_netfin": "-11.9574"
+    }
+  },
+  {
+    "test": "M9a",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "0% sale = baseline (inert)",
+    "evidence": {
+      "bl_int": "9.8994",
+      "0pct_int": "9.8994"
+    }
+  },
+  {
+    "test": "M9b",
+    "severity": "MEDIUM",
+    "class": "SILENT-WRONG",
+    "desc": "100% sale: retained = 1 (expected 0)",
+    "evidence": {
+      "retained": 1,
+      "at": "\u2705 ALL CHECKS PASS \u2014 arithmetic verified and a real deal is loaded"
+    }
+  },
+  {
+    "test": "M10",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Sale year shift: Y1-Y2 identical, difference starts at event year",
+    "evidence": {
+      "yr3_int_y1": "9.8123",
+      "yr5_int_y1": "9.8123",
+      "yr3_int_y2": "39.7170",
+      "yr5_int_y2": "39.7170"
+    }
+  },
+  {
+    "test": "M12",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Report USD: engine unchanged, display scales by FX",
+    "evidence": {
+      "bl_dash_int": "9.8994",
+      "usd_dash_int": "11.7546",
+      "bl_engine_int": "9.8994",
+      "usd_engine_int": "9.8994"
+    }
+  },
+  {
+    "test": "M13",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Horizon 3: Y1-Y3 identical to horizon 8",
+    "evidence": {
+      "bl_y1": "0.0396",
+      "h3_y1": "0.0396",
+      "bl_y3": "0.0414",
+      "h3_y3": "0.0414"
+    }
+  },
+  {
+    "test": "M14",
+    "severity": "info",
+    "class": "LOUD-OK",
+    "desc": "Three recalcs produce identical results",
+    "evidence": {
+      "num_diffs_run2": 0,
+      "num_diffs_run3": 0
+    }
+  }
+]

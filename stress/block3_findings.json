@@ -1,0 +1,12 @@
+[
+  {
+    "test": "L3_cash_mode",
+    "severity": "LOW",
+    "class": "MISLEADING",
+    "desc": "Cash treatment makes no difference (cash=0 in baseline \u2014 test with cash>0)",
+    "evidence": {
+      "reduces_finres": "-11.9574",
+      "held_finres": "-11.9574"
+    }
+  }
+]
